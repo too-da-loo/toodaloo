@@ -101,7 +101,7 @@ Application that assists users in locating restrooms within a set radius and oth
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/too-da-loo/toodaloo/blob/main/IMG_1237.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
