@@ -149,6 +149,7 @@ Post
    ```
 - (Create/POST) Create a new comment on a post
 - (Create/POST) Create a new like on a post
+- (Update/PUT) Update the screen with user's post
 - (Delete) Delete existing comment
 - (Delete) Delete existing like
 
@@ -158,5 +159,8 @@ Post
 3. Profile screen
 - (Read/GET) Query logged in user object
 - (Update/PUT) Update user profile image
+
+4. Create map screen
+- (Update/PUT) Update the bathroom map
 
 
