@@ -108,7 +108,22 @@ Application that assists users in locating restrooms within a set radius and oth
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
+Post
+|Property|Type|Description|
+|--------|----|-----------|
+|objectId|objectId|unique id for the user post (default field)|
+|author|Pointer to User|image author|
+|caption|String|image caption by author|
+|commentsCount|Number|number of comments that has been posted to an image|
+|likesCount|Number|number of likes for the post|
+|createdAt|DateTime|date when post is created (default field)|
+|updatedAt|DateTime|date when post is last updated (default field)|
+
+
+
+
+
+
 ### Models
 [Add table of models]
 ### Networking
