@@ -116,13 +116,9 @@ Post
 |caption|String|image caption by author|
 |commentsCount|Number|number of comments that has been posted to an image|
 |likesCount|Number|number of likes for the post|
+|ratingBar|image/number|star rating|
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
-
-
-
-
-
 
 ### Models
 [Add table of models]
