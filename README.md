@@ -107,7 +107,16 @@ Application that assists users in locating restrooms within a set radius and oth
 
 ### [BONUS] Interactive Prototype
 
-## Schema 
+## Schema
+User
+|Property|Type|Description|
+|--------|----|-----------|
+|author|Pointer to User|image author|
+|caption|String|profile caption|
+|followerCount|Number|number of followers for the user|
+|followingCount|Number|number of people user is following|
+|image|file|profile image of the user|
+
 Post
 |Property|Type|Description|
 |--------|----|-----------|
