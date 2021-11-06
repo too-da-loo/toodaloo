@@ -132,6 +132,13 @@ Post
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
 
+
+Map
+|Property|Type|Description|
+|--------|----|-----------|
+|getAPI|String|api for google maps|
+|locationAt|String|location of user|
+
 ### Networking
 1. Posting/review feed: 
 - (Read/GET) Query all posts where user is author
