@@ -108,6 +108,7 @@ Application that assists users in locating restrooms within a set radius and oth
 ### [BONUS] Interactive Prototype
 
 ## Schema
+### Models
 User
 |Property|Type|Description|
 |--------|----|-----------|
@@ -129,7 +130,6 @@ Post
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
 
-### Models
 [Add table of models]
 ### Networking
 ```
