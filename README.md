@@ -108,7 +108,6 @@ Application that assists users in locating restrooms within a set radius and oth
 ### [BONUS] Interactive Prototype
 
 ## Schema
-### Models
 User
 |Property|Type|Description|
 |--------|----|-----------|
@@ -130,13 +129,24 @@ Post
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
 
+### Models
+[Add table of models]
 ### Networking
-```
-int main() {
-   cout <<"hello" 
-   }
- ```
+1. Posting/review feed: 
+- (Read/GET) Query all posts where user is author
+   ```
+   query 
+   ```
+- (Create/POST) Create a new comment on a post
+- (Create/POST) Create a new like on a post
+- (Delete) Delete existing comment
+- (Delete) Delete existing like
 
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+2. Create Post screen
+- (Create/POST) Create a new post object
+
+3. Profile screen
+- (Read/GET) Query logged in user object
+- (Update/PUT) Update user profile image
+
+
