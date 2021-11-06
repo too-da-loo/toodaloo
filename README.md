@@ -100,6 +100,7 @@ Application that assists users in locating restrooms within a set radius and oth
     * Stream
 
 ## Wireframes
+[Add picture of your hand sketched wireframes in this section]
 <img src="https://github.com/too-da-loo/toodaloo/blob/main/Wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
@@ -131,18 +132,20 @@ Post
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
 
-
-Map
-|Property|Type|Description|
-|--------|----|-----------|
-|getAPI|String|api for google maps|
-|locationAt|String|location of user|
-
 ### Networking
 1. Posting/review feed: 
 - (Read/GET) Query all posts where user is author
    ```
-   query 
+   let query = PFQuery(className: "Post")
+   query.whereKey("author", equalTo: currentUser)
+   query.order(byDescending: "createdAt")
+   query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+      if let error = error { 
+         print(error.localizedDescription)
+      } else if let posts = posts {
+         print("Successfully retrieved \(posts.count) posts.")
+      }
+    }
    ```
 - (Create/POST) Create a new comment on a post
 - (Create/POST) Create a new like on a post
