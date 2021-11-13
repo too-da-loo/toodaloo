@@ -107,11 +107,60 @@ Application that assists users in locating restrooms within a set radius and oth
 
 ### [BONUS] Interactive Prototype
 
-## Schema 
-[This section will be completed in Unit 9]
+## Schema
+
+
 ### Models
-[Add table of models]
+User
+|Property|Type|Description|
+|--------|----|-----------|
+|author|Pointer to User|image author|
+|caption|String|profile caption|
+|followerCount|Number|number of followers for the user|
+|followingCount|Number|number of people user is following|
+|image|file|profile image of the user|
+
+Post
+|Property|Type|Description|
+|--------|----|-----------|
+|objectId|objectId|unique id for the user post (default field)|
+|author|Pointer to User|image author|
+|caption|String|image caption by author|
+|commentsCount|Number|number of comments that has been posted to an image|
+|likesCount|Number|number of likes for the post|
+|ratingBar|image/number|star rating|
+|createdAt|DateTime|date when post is created (default field)|
+|updatedAt|DateTime|date when post is last updated (default field)|
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+1. Posting/review feed: 
+- (Read/GET) Query all posts where user is author
+   ```
+   let query = PFQuery(className: "Post")
+   query.whereKey("author", equalTo: currentUser)
+   query.order(byDescending: "createdAt")
+   query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+      if let error = error { 
+         print(error.localizedDescription)
+      } else if let posts = posts {
+         print("Successfully retrieved \(posts.count) posts.")
+      }
+    }
+   ```
+- (Create/POST) Create a new comment on a post
+- (Create/POST) Create a new like on a post
+- (Update/PUT) Update the screen with user's post
+- (Delete) Delete existing comment
+- (Delete) Delete existing like
+
+2. Create Post screen
+- (Create/POST) Create a new post object
+
+3. Profile screen
+- (Read/GET) Query logged in user object
+- (Update/PUT) Update user profile image
+
+4. Create map screen
+- (Update/PUT) Update the bathroom map
+
+
