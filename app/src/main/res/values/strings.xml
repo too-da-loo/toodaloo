@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">toodaloo</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="profile">profile</string>
+    <string name="feed">feed</string>
+    <string name="map">map</string>
 </resources>
