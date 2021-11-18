@@ -30,9 +30,9 @@ Application that assists users in locating restrooms within a set radius and oth
 
 * Login
 * Logout
-* Maps
-* Profile for user 
-* Profile for bathroom
+- [x] Maps
+- [x] Profile for user 
+- [x] Profile for bathroom
 * Sign up
 
 
@@ -52,7 +52,7 @@ Application that assists users in locating restrooms within a set radius and oth
 * Sign up page
 * Logout
    * User can logout
-- [x] Profile for bathroom
+* Profile for bathroom
     * Reviews about the specific bathroom
     * Address
     * Access Requirements (keys, purchase items, etc.)
@@ -60,11 +60,11 @@ Application that assists users in locating restrooms within a set radius and oth
     * Disabled station availability
     * Details about stalls
     * Write a review button
-- [x] Profile for user 
+* Profile for user 
     * Gender 
     * Radius
     * Past reviews
-- [x] Maps
+* Maps
     * Maps should have an icon for bathrooms
     * Ask user for location access
 * Stream
