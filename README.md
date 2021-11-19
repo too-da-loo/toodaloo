@@ -28,12 +28,12 @@ Application that assists users in locating restrooms within a set radius and oth
 
 **Required Must-have Stories**
 
-* Login
-* Logout
+- [x] Login
+- [x] Logout
 - [x] Maps
 - [x] Profile for user 
 - [x] Profile for bathroom
-* Sign up
+- [x] Sign up
 
 
 **Optional Nice-to-have Stories**
