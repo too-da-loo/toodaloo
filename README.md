@@ -30,9 +30,9 @@ Application that assists users in locating restrooms within a set radius and oth
 
 * Login
 * Logout
-* Maps
-* Profile for user 
-* Profile for bathroom
+- [x] Maps
+- [x] Profile for user 
+- [x] Profile for bathroom
 * Sign up
 
 
