@@ -163,4 +163,11 @@ Post
 4. Create map screen
 - (Update/PUT) Update the bathroom map
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='ToodalooSprint1.gif' title='Video Walkthrough' width='250' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
