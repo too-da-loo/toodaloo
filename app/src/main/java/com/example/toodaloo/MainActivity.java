@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.toodaloo.fragments.FeedFragment;
+import com.example.toodaloo.fragments.MapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.action_map:
                         Toast.makeText(MainActivity.this, "MAP!", Toast.LENGTH_SHORT).show();
-                        fragment = new Fragment();
+                        fragment = new MapFragment();
                         break;
                     case R.id.action_profile:
                         Toast.makeText(MainActivity.this, "PROFILE!", Toast.LENGTH_SHORT).show();
@@ -51,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_map);
-    }
-
-    public void openMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
     }
 
     public void openLogin(View view) {
