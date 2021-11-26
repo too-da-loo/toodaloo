@@ -167,7 +167,7 @@ Post
 
 Here's a walkthrough of implemented user stories:
 
-<img src='ToodalooSprint1.gif' title='Video Walkthrough' width='250' alt='Video Walkthrough' />
+<img src='https://github.com/too-da-loo/toodaloo/blob/main/Week%2011%20-%20LogIn%20Page%20Walkthrough.gif' title='Video Walkthrough' width='250' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
