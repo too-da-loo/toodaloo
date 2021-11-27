@@ -168,6 +168,7 @@ Post
 Here's a walkthrough of implemented user stories:
 
 <img src='https://github.com/too-da-loo/toodaloo/blob/main/Week%2011%20-%20LogIn%20Page%20Walkthrough.gif' title='Video Walkthrough' width='400' alt='Video Walkthrough' />
+<img src='MapFragment.gif' title='Video Walkthrough' width='400' alt='Video Walkthrough' />
 
 <img src='...' title='Video Walkthrough' width='400' alt='Video Walkthrough' />
 
