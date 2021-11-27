@@ -15,21 +15,6 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openMap"
-        android:text="Map" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openLogin"
-        android:layout_below="@id/button"
-        android:text="Login" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -9,13 +9,8 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25sp"
         tools:text="UserName" />
-
-    <TextView
-        android:id="@+id/establishmentName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="APPLE BEES" />
 
     <TextView
         android:id="@+id/reviewDescription"

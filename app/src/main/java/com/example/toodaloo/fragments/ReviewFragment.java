@@ -1,6 +1,10 @@
 package com.example.toodaloo.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,15 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-
-import com.example.toodaloo.Review;
+import com.example.toodaloo.Post;
+import com.example.toodaloo.PostsAdapter;
 import com.example.toodaloo.R;
-import com.example.toodaloo.ReviewsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -27,8 +25,8 @@ import java.util.List;
 public class ReviewFragment extends Fragment {
     private RecyclerView rvFeed;
     public static final String TAG = "ReviewFragment";
-    private ReviewsAdapter adapter;
-    private List<Review> allReviews;
+    private PostsAdapter adapter;
+    private List<Post> allPosts;
 
     public ReviewFragment() {
         // Required empty public constructor
@@ -45,28 +43,28 @@ public class ReviewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvFeed = view.findViewById(R.id.rvFeed);
-        allReviews  = new ArrayList<>();
-        adapter = new ReviewsAdapter(getContext(), allReviews);
+        allPosts = new ArrayList<>();
+        adapter = new PostsAdapter(getContext(), allPosts);
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
     }
 
     protected void queryPosts(){
-        ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
-        query.include(Review.KEY_USER);
-        query.findInBackground(new FindCallback<Review>() {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<Review> reviews, ParseException e) {
+            public void done(List<Post> posts, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting reviews", e);
+                    Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
-                for(Review review : reviews){
-                    Log.i(TAG, "Review: " + review.getReview() + ", Username: " + review.getUser().getUsername());
+                for(Post post : posts){
+                    Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
                 }
 
-                allReviews.addAll(reviews);
+                allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
         });

@@ -1,25 +1,20 @@
 package com.example.toodaloo;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import com.example.toodaloo.fragments.ReviewFragment;
+import com.example.toodaloo.fragments.MapFragment;
 import com.example.toodaloo.fragments.ProfileFragment;
+import com.example.toodaloo.fragments.ReviewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
@@ -42,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.action_map:
                         Toast.makeText(MainActivity.this, "MAP!", Toast.LENGTH_SHORT).show();
-                        fragment = new ProfileFragment();
+                        fragment = new MapFragment();
                         break;
                     case R.id.action_profile:
                         Toast.makeText(MainActivity.this, "PROFILE!", Toast.LENGTH_SHORT).show();
@@ -61,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_map);
     }
 
-    public void openMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
+
 
     public void openLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);

@@ -39,8 +39,8 @@ Application that assists users in locating restrooms within a set radius and oth
 **Optional Nice-to-have Stories**
 
 * User can see their profile page with their photos
-* People often mentioned tags (in reviews for bathroom)
-* Helpful or not helpful button for each review.
+* People often mentioned tags (in posts for bathroom)
+* Helpful or not helpful button for each post.
 * Incentive - cute avatar, title
     * Will need a point system bar
 * Favorites tab
@@ -59,11 +59,11 @@ Application that assists users in locating restrooms within a set radius and oth
     * Diaper station availability 
     * Disabled station availability
     * Details about stalls
-    * Write a review button
+    * Write a post button
 * Profile for user 
     * Gender 
     * Radius
-    * Past reviews
+    * Past posts
 * Maps
     * Maps should have an icon for bathrooms
     * Ask user for location access
@@ -133,7 +133,7 @@ Post
 |updatedAt|DateTime|date when post is last updated (default field)|
 
 ### Networking
-1. Posting/review feed: 
+1. Posting/post feed: 
 - (Read/GET) Query all posts where user is author
    ```
    let query = PFQuery(className: "Post")

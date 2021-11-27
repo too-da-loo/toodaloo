@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/drawable/map_button_bg.xml" value="0.1828125" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_login.xml" value="0.41458333333333336" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_maps.xml" value="0.4109375" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_feed.xml" value="0.24537037037037038" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_map.xml" value="0.4109375" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_profile.xml" value="0.44166666666666665" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/item_post.xml" value="0.23981481481481481" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/restroom_profile.xml" value="0.33" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/review_post.xml" value="0.33" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.34479166666666666" />
