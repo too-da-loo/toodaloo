@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/action_map"
+        android:icon="@drawable/map_button_bg"
         android:title="@string/map"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_feed"
+        android:icon="@drawable/feed_button_bg"
         android:title="@string/feed"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
+        android:icon="@drawable/profile_button_bg"
         android:title="@string/profile"
         app:showAsAction="always" />
 </menu>

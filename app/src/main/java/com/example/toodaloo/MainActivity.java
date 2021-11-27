@@ -7,12 +7,19 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.toodaloo.fragments.FeedFragment;
+import com.example.toodaloo.fragments.ReviewFragment;
+import com.example.toodaloo.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
@@ -31,19 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment = null;
+                Fragment fragment;
                 switch(menuItem.getItemId()){
                     case R.id.action_map:
                         Toast.makeText(MainActivity.this, "MAP!", Toast.LENGTH_SHORT).show();
-                        fragment = new Fragment();
+                        fragment = new ProfileFragment();
                         break;
                     case R.id.action_profile:
                         Toast.makeText(MainActivity.this, "PROFILE!", Toast.LENGTH_SHORT).show();
-                        fragment = new FeedFragment();
+                        fragment = new ProfileFragment();
                         break;
                     case R.id.action_feed:
+                    default:
                         Toast.makeText(MainActivity.this,"FEED", Toast.LENGTH_SHORT).show();
-                        fragment = new FeedFragment();
+                        fragment = new ReviewFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
@@ -62,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
 }
