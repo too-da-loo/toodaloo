@@ -74,7 +74,7 @@ public class MapFragment extends Fragment {
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 16;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
 
@@ -87,7 +87,7 @@ public class MapFragment extends Fragment {
     private static final String KEY_LOCATION = "location";
 
     // Used for selecting the current place.
-    private static final int M_MAX_ENTRIES = 5;
+    private static final int M_MAX_ENTRIES = 10;
     private String[] likelyPlaceNames;
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
@@ -96,6 +96,11 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        // Retrieve location and camera position from saved instance state.
+        if (savedInstanceState != null) {
+            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        }
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
@@ -112,6 +117,29 @@ public class MapFragment extends Fragment {
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 map=googleMap;
 
+                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                    @Nullable
+                    @Override
+                    public View getInfoContents(@NonNull Marker marker) {
+                        // Inflate the layouts for the info window, title and snippet.
+                        @SuppressLint("ResourceType") View infoWindow = inflater.inflate(R.layout.custom_info_contents,
+                                (FrameLayout) getView().findViewById(R.layout.fragment_map));
+
+                        TextView title = infoWindow.findViewById(R.id.title);
+                        title.setText(marker.getTitle());
+
+                        TextView snippet = infoWindow.findViewById(R.id.snippet);
+                        snippet.setText(marker.getSnippet());
+
+                        return infoWindow;
+                    }
+
+                    @Nullable
+                    @Override
+                    public View getInfoWindow(@NonNull Marker marker) {
+                        return null;
+                    }
+                });
                 //When map is loaded
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -130,6 +158,7 @@ public class MapFragment extends Fragment {
                         ));
                         //Add marker on map
                         googleMap.addMarker(markerOptions);
+
 
                     }
                 });
@@ -161,7 +190,6 @@ public class MapFragment extends Fragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //getMenuInflater().inflate(R.menu.current_place_menu, menu);
         inflater.inflate(R.menu.current_place_menu,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
