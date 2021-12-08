@@ -13,11 +13,18 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -59,6 +66,7 @@ public class MapFragment extends Fragment {
     private static final String TAG = "MapFragment";
     private GoogleMap map;
     private CameraPosition cameraPosition;
+    SearchView searchView;
 
     private PlacesClient placesClient;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -88,6 +96,7 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
@@ -102,6 +111,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 map=googleMap;
+
                 //When map is loaded
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -135,7 +145,53 @@ public class MapFragment extends Fragment {
         });
 
         return view;
+
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    /**
+     * Sets up the options menu.
+     * @param menu The options menu.
+     * @return Boolean.
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //getMenuInflater().inflate(R.menu.current_place_menu, menu);
+        inflater.inflate(R.menu.current_place_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * Handles a click on the menu option to get a place.
+     * @param item The menu item to handle.
+     * @return Boolean.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.option_get_place) {
+            showCurrentPlace();
+        }
+        return true;
+    }
+
+    /**
+     * Saves the state of the map when the activity is paused.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (map != null) {
+            outState.putParcelable(KEY_CAMERA_POSITION, map.getCameraPosition());
+            outState.putParcelable(KEY_LOCATION, lastKnownLocation);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+
 
     private void getDeviceLocation(){
         /*
