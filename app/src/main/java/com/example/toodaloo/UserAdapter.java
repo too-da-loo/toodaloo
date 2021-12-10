@@ -1,7 +1,6 @@
 package com.example.toodaloo;
 
 import android.content.Context;
-import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +57,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView profileUsername;
-//        private TextView tvDescription;
-        // private TextView restName;
         private ImageView ivImage;
 
 
@@ -67,8 +64,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             profileUsername = itemView.findViewById(R.id.profileUsername);
-//            //restName = itemView.findViewById(R.id.establishmentName);
-//            tvDescription = itemView.findViewById(R.id.reviewDescription);
             ivImage = itemView.findViewById(R.id.profileImage);
 
         }
@@ -77,8 +72,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         public void bind(User users) {
             //Bind the post data to the view elements
             profileUsername.setText(users.getUser().getUsername());
-//            tvUsername.setText(users.getUser().getUsername());
-            //restName.setText(post.getrestName());
             ParseFile image = users.getProfileImage();
             if (image != null) {
                 Glide.with(context).load(users.getProfileImage().getUrl()).into(ivImage);

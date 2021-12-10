@@ -9,15 +9,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +36,6 @@ public class ProfileFragment extends Fragment{
     private RecyclerView rvFeed;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
-
     //Profile Image:
     private ImageView profilePicture;
     private TextView profileUsername;
@@ -54,8 +50,6 @@ public class ProfileFragment extends Fragment{
         // Inflate the layout for this fragment
         //Profile Image:
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        profilePicture = view.findViewById(R.id.profileImage);
-        profileUsername = view.findViewById(R.id.profileUsername);
         return view;
     }
 
@@ -69,11 +63,11 @@ public class ProfileFragment extends Fragment{
         adapter = new PostsAdapter(getContext(), allPosts);
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
-        queryProfile();
 
-//        //Profile Image:
-//        profilePicture = view.findViewById(R.id.profileImage);
-//        profileUsername = view.findViewById(R.id.profileUsername);
+        //Profile Image:
+        profilePicture = view.findViewById(R.id.profileImage);
+        profileUsername = view.findViewById(R.id.profileUsername);
+        queryProfile();
 
         //Actionbar:
         setHasOptionsMenu(true);
@@ -107,6 +101,7 @@ public class ProfileFragment extends Fragment{
     protected void queryProfile() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.include(Post.KEY_PROFILE_IMAGE);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
         query.setLimit(20);
         //ADD KEY:
@@ -120,10 +115,12 @@ public class ProfileFragment extends Fragment{
                 }
                 for(Post post : posts){
                     Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
+                    profileUsername.setText(post.getUser().getUsername());
                 }
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 }
