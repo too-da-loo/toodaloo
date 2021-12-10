@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
-    private final int REQUEST_CODE = 20;
+
     private BottomNavigationView bottomNavigationView;
 
     @Override
