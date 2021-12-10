@@ -24,6 +24,14 @@
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/layout/fragment_profile.xml" value="0.2546875" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/layout/restroom_profile.xml" value="0.2546875" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.13177083333333334" />
+        <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.22870370370370371" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/item_post.xml" value="0.1703125" />
+        <entry key="app/src/main/res/menu/compose_button_feed.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/menu/logout_button_profile.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/xml/fileprovider.xml" value="0.19375" />
       </map>
     </option>
   </component>

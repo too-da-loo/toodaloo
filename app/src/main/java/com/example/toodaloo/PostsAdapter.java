@@ -4,10 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.toodaloo.Post;
+import com.example.toodaloo.R;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -52,15 +58,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvDescription;
-        private TextView restaurantName;
+       // private TextView restName;
+        private ImageView ivImage;
 
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.username);
-            restaurantName = itemView.findViewById(R.id.restaurantName);
+            //restName = itemView.findViewById(R.id.establishmentName);
             tvDescription = itemView.findViewById(R.id.reviewDescription);
+            ivImage = itemView.findViewById(R.id.ivImage);
 
         }
 
@@ -69,7 +77,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-           // restaurantName.setText(post.getParseObject());
+            //restName.setText(post.getrestName());
+            ParseFile image = post.getImage();
+            if (image != null) {
+                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+            }
         }
     }
 }
