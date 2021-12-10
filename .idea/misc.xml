@@ -7,14 +7,18 @@
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_login.xml" value="0.41458333333333336" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/activity_maps.xml" value="0.4109375" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/custom_info_contents.xml" value="0.146875" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_compose.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_feed.xml" value="0.24537037037037038" />
-        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_map.xml" value="0.4109375" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_map.xml" value="0.3574144486692015" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/fragment_profile.xml" value="0.44166666666666665" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/item_post.xml" value="0.5" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/restroom_profile.xml" value="0.33" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/layout/review_post.xml" value="0.33" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/action_menu.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/compose_button_feed.xml" value="0.146875" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/current_place_menu.xml" value="0.146875" />
+        <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/logout_button_profile.xml" value="0.146875" />
         <entry key="..\:/Users/Dango/Documents/GitHub/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/drawable/feed_button_bg.xml" value="0.31203703703703706" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.31203703703703706" />
@@ -30,7 +34,8 @@
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/layout/fragment_profile.xml" value="0.2546875" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/layout/item_post.xml" value="0.2546875" />
         <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/layout/restroom_profile.xml" value="0.2546875" />
-        <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.13177083333333334" />
+        <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/current_place_menu.xml" value="0.2546875" />
+        <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.22870370370370371" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24427083333333333" />
@@ -39,8 +44,6 @@
         <entry key="app/src/main/res/menu/logout_button_profile.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.19375" />
-        <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/current_place_menu.xml" value="0.2546875" />
-        <entry key="..\:/Users/Paul/AndroidStudioProjects/toodaloo/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3" />
       </map>
     </option>
   </component>
