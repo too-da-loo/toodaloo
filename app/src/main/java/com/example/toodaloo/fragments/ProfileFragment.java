@@ -9,15 +9,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,7 +70,7 @@ public class ProfileFragment extends Fragment{
 
 //        //Profile Image:
 //        profilePicture = view.findViewById(R.id.profileImage);
-//        profileUsername = view.findViewById(R.id.profileUsername);
+        profileUsername = view.findViewById(R.id.profileUsername);
 
         //Actionbar:
         setHasOptionsMenu(true);
@@ -120,6 +117,7 @@ public class ProfileFragment extends Fragment{
                 }
                 for(Post post : posts){
                     Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
+                    profileUsername.setText(post.getUser().getUsername());
                 }
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
