@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.toodaloo.Post;
-import com.example.toodaloo.R;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -60,7 +58,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvDescription;
-       // private TextView restName;
+        // private TextView restName;
         private ImageView ivImage;
 
 
