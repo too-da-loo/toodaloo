@@ -12,10 +12,17 @@
         android:textSize="25sp"
         tools:text="UserName" />
 
+
     <TextView
         android:id="@+id/reviewDescription"
         android:layout_width="match_parent"
         android:layout_height="92dp"
         tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
 
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
 </LinearLayout>

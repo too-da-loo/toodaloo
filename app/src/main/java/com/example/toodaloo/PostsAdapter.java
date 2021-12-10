@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.toodaloo.Post;
 import com.example.toodaloo.R;
 import com.parse.ParseFile;
@@ -43,10 +44,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     public int getItemCount() {
         return posts.size();
     }
-    public void clear() {
-        posts.clear();
-        notifyDataSetChanged();
-    }
+
+//    public void clear() {
+//        posts.clear();
+//        notifyDataSetChanged();
+//
+//    }
 
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
@@ -58,6 +61,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private TextView tvUsername;
         private TextView tvDescription;
        // private TextView restName;
+        private ImageView ivImage;
 
 
 
@@ -66,6 +70,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvUsername = itemView.findViewById(R.id.username);
             //restName = itemView.findViewById(R.id.establishmentName);
             tvDescription = itemView.findViewById(R.id.reviewDescription);
+            ivImage = itemView.findViewById(R.id.ivImage);
 
         }
 
@@ -75,6 +80,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             //restName.setText(post.getrestName());
+            ParseFile image = post.getImage();
+            if (image != null) {
+                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+            }
         }
     }
 }
