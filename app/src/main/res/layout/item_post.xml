@@ -13,9 +13,15 @@
         tools:text="UserName" />
 
     <TextView
+        android:id="@+id/restaurantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="AppleBees" />
+
+    <TextView
         android:id="@+id/reviewDescription"
         android:layout_width="match_parent"
-        android:layout_height="92dp"
+        android:layout_height="wrap_content"
         tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
 
 </LinearLayout>

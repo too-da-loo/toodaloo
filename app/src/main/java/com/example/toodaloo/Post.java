@@ -11,15 +11,13 @@ public class Post extends ParseObject {
    public static final  String KEY_IMAGE = "image";
    public static final  String KEY_USER = "user";
    public static final  String KEY_CREATED_KEY = "createdAt";
-   //public static final  String KEY_RESTNAME = ""
+   public static final  String KEY_RESTNAME = "restaurantName";
 
    public String getDescription(){
       return getString(KEY_DESCRIPTION);
    }
 
-   public void setDescription (String description){
-      put(KEY_DESCRIPTION, description);
-   }
+   public void setDescription (String description){ put(KEY_DESCRIPTION, description); }
 
    public ParseFile getImage(){
       return getParseFile(KEY_IMAGE);
@@ -29,14 +27,14 @@ public class Post extends ParseObject {
       put(KEY_IMAGE,parseFile);
    }
 
-   public ParseUser getUser(){
-      return getParseUser(KEY_USER);
-   }
+   public ParseUser getUser(){ return getParseUser(KEY_USER); }
 
    public void setUser(ParseUser user){
       put(KEY_USER, user);
    }
 
+   public ParseObject getRestaurant() {return getParseObject(KEY_RESTNAME);}
 
-  // public String getrestName() { return getString(KEY_RESTNAME);}
+   public void setRestaurant(ParseObject restaurant) {put (KEY_RESTNAME, restaurant);}
+
 }

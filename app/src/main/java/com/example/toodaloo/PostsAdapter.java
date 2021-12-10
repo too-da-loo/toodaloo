@@ -4,15 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.toodaloo.Post;
-import com.example.toodaloo.R;
-import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -57,14 +52,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvDescription;
-       // private TextView restName;
+        private TextView restaurantName;
 
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.username);
-            //restName = itemView.findViewById(R.id.establishmentName);
+            restaurantName = itemView.findViewById(R.id.restaurantName);
             tvDescription = itemView.findViewById(R.id.reviewDescription);
 
         }
@@ -74,7 +69,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            //restName.setText(post.getrestName());
+           // restaurantName.setText(post.getParseObject());
         }
     }
 }
