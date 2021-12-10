@@ -2,6 +2,7 @@ package com.example.toodaloo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
-    private final int REQUEST_CODE = 20;
+
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final FragmentManager fragmentManager = getSupportFragmentManager();
+
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -54,7 +56,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_map);
+
     }
+
+
+
 
     public void openLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
