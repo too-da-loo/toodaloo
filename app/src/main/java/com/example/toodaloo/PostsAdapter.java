@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.toodaloo.Post;
+import com.example.toodaloo.R;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -42,12 +44,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     public int getItemCount() {
         return posts.size();
     }
-
-//    public void clear() {
-//        posts.clear();
-//        notifyDataSetChanged();
-//
-//    }
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
 
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
@@ -58,7 +58,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvDescription;
-        // private TextView restName;
+       // private TextView restName;
         private ImageView ivImage;
 
 
