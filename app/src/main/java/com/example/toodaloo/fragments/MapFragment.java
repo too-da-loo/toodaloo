@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.toodaloo.MainActivity;
 import com.example.toodaloo.R;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -54,10 +55,17 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.parse.Parse.getApplicationContext;
 
@@ -66,7 +74,7 @@ public class MapFragment extends Fragment {
     private static final String TAG = "MapFragment";
     private GoogleMap map;
     private CameraPosition cameraPosition;
-    SearchView searchView;
+    //SearchView searchView;
 
     private PlacesClient placesClient;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -116,7 +124,6 @@ public class MapFragment extends Fragment {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 map=googleMap;
-
                 map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Nullable
                     @Override
@@ -158,8 +165,6 @@ public class MapFragment extends Fragment {
                         ));
                         //Add marker on map
                         googleMap.addMarker(markerOptions);
-
-
                     }
                 });
                 // Prompt the user for permission.
