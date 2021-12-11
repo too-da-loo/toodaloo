@@ -18,12 +18,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.toodaloo.LoginActivity;
 import com.example.toodaloo.Post;
 import com.example.toodaloo.PostsAdapter;
 import com.example.toodaloo.R;
+import com.example.toodaloo.User;
+import com.example.toodaloo.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -34,11 +38,13 @@ public class ProfileFragment extends Fragment{
     public static final String TAG = "ProfileFragment";
     //FROM REVIEW FRAGMENT:
     private RecyclerView rvFeed;
-    protected PostsAdapter adapter;
+    protected UserAdapter adapter;
+    protected List<User> allUsers;
+    protected PostsAdapter adapter1;
     protected List<Post> allPosts;
 
     //Profile Image:
-    private ImageView profilePicture;
+    public ImageView profilePicture;
     private TextView profileUsername;
 
     public ProfileFragment() {
@@ -51,8 +57,8 @@ public class ProfileFragment extends Fragment{
         // Inflate the layout for this fragment
         //Profile Image:
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        profilePicture = view.findViewById(R.id.profileImage);
-        profileUsername = view.findViewById(R.id.profileUsername);
+      //  profilePicture = view.findViewById(R.id.profileImage);
+        //profileUsername = view.findViewById(R.id.profileUsername);
         return view;
     }
 
@@ -62,19 +68,22 @@ public class ProfileFragment extends Fragment{
 
         //FROM REVIEW FRAGMENT
         rvFeed = view.findViewById(R.id.rvProfile);
-        allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(getContext(), allPosts);
-        rvFeed.setAdapter(adapter);
+        allPosts = new ArrayList<Post>();
+        adapter1 = new PostsAdapter(getContext(), allPosts);
+
+        allUsers = new ArrayList<User>();
+        adapter = new UserAdapter(getContext(), allUsers);
+
+        rvFeed.setAdapter(adapter1);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryProfile();
 
 //        //Profile Image:
-//        profilePicture = view.findViewById(R.id.profileImage);
+        profilePicture = view.findViewById(R.id.profileImage);
         profileUsername = view.findViewById(R.id.profileUsername);
 
         //Actionbar:
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -103,24 +112,41 @@ public class ProfileFragment extends Fragment{
 //    @Override
     protected void queryProfile() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        ParseQuery<User> query1 = ParseQuery.getQuery(User.class);
+
         query.include(Post.KEY_USER);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
         query.setLimit(20);
+
+        query1.include(User.KEY_USERNAME);
+        query1.whereEqualTo(User.KEY_USERNAME, ParseUser.getCurrentUser());
+        query1.findInBackground(new FindCallback<User>() {
+            @Override
+            public void done(List<User> objects, ParseException e) {
+                for(User name : objects){
+
+                    ParseFile image = name.getProfileImage();
+                        Log.i(TAG, "Image: " + name.getProfileImage());
+                        Glide.with(getContext()).load(name.getProfileImage().getUrl()).into(profilePicture);
+                }
+            }
+        });
+
         //ADD KEY:
-        query.addDescendingOrder(Post.KEY_CREATED_KEY);
+        query.addDescendingOrder(User.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<Post> users, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
-                for(Post post : posts){
-                    Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
-                    profileUsername.setText(post.getUser().getUsername());
+                for(Post user : users){
+                    Log.i(TAG, "Post: " + user.getDescription() + ", Username: " + user.getUser().getUsername());
+                    profileUsername.setText(user.getUser().getUsername());
                 }
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                allPosts.addAll(users);
+                adapter1.notifyDataSetChanged();
             }
         });
     }

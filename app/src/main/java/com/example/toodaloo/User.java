@@ -9,6 +9,8 @@ import com.parse.ParseUser;
 public class User extends ParseObject {
     public static final String KEY_PROFILE_IMAGE = "profilePicture";
     public static final  String KEY_USERNAME = "user";
+    public static final  String KEY_CREATED_KEY = "createdAt";
+    public static final  String KEY_DESCRIPTION = "description";
 
     public ParseFile getProfileImage() {return getParseFile(KEY_PROFILE_IMAGE);}
     public void setImage(ParseFile parseFile){ put(KEY_PROFILE_IMAGE,parseFile); }
@@ -18,6 +20,12 @@ public class User extends ParseObject {
     public void setUser(ParseUser user){
         put(KEY_USERNAME, user);
     }
+
+    public String getDescription(){
+        return getString(KEY_DESCRIPTION);
+    }
+
+    public void setDescription (String description){ put(KEY_DESCRIPTION, description); }
 
 
 }
