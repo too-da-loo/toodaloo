@@ -26,6 +26,17 @@ Application that assists users in locating restrooms within a set radius and oth
 
 ### 1. User Stories (Required and Optional)
 
+
+**Unit 13**
+The following **required** functionality is completed:
+
+- [X] User can press ** Get Places** in the Action Bar
+  - [X] User can click a “Compose” icon in the Action Bar on the top right
+  - [X] User can then enter a new review/photo and post this to feed
+  - [X] User can swipe to refresh feed
+  - [X] User can see only their posts under their Profile
+
+
 **Required Must-have Stories**
 
 - [x] Login
