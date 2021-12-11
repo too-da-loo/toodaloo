@@ -26,8 +26,8 @@ Application that assists users in locating restrooms within a set radius and oth
 
 ### 1. User Stories (Required and Optional)
 
-## Unit 13
-
+ #Unit 13
+ 
 The following **required** functionality is completed:
 
 - [X] User can press ** Get Places** in the Action Bar
