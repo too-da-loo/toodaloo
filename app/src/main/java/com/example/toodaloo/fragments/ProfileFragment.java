@@ -1,6 +1,8 @@
 package com.example.toodaloo.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 public class ProfileFragment extends Fragment{
@@ -74,6 +77,7 @@ public class ProfileFragment extends Fragment{
         allUsers = new ArrayList<User>();
         adapter = new UserAdapter(getContext(), allUsers);
 
+        //TEST SETTING SEPARATE ADAPTER ***********************************************
         rvFeed.setAdapter(adapter1);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryProfile();
@@ -111,27 +115,50 @@ public class ProfileFragment extends Fragment{
 
 //    @Override
     protected void queryProfile() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+
         ParseQuery<User> query1 = ParseQuery.getQuery(User.class);
-
-        query.include(Post.KEY_USER);
-        query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
-        query.setLimit(20);
-
         query1.include(User.KEY_USERNAME);
         query1.whereEqualTo(User.KEY_USERNAME, ParseUser.getCurrentUser());
+        query1.addDescendingOrder(User.KEY_CREATED_KEY);
+
         query1.findInBackground(new FindCallback<User>() {
             @Override
             public void done(List<User> objects, ParseException e) {
-                for(User name : objects){
-
-                    ParseFile image = name.getProfileImage();
-                        Log.i(TAG, "Image: " + name.getProfileImage());
-                        Glide.with(getContext()).load(name.getProfileImage().getUrl()).into(profilePicture);
+                if (e != null) {
+                    Log.e(TAG, "Pictures: Parse exception null", e);
+                    return;
                 }
+                //Log.i(TAG, "INDEX TEST: " + objects.get(0).getUser().getUsername());
+
+                ImageView imgUser = (ImageView) getView().findViewById(R.id.profileImage);
+                ParseUser currentUser = ParseUser.getCurrentUser();
+
+                try {
+                    ParseFile img = currentUser.getParseFile("profilePicture");
+                    Bitmap bmp = BitmapFactory.decodeStream(img.getDataStream());
+                    Log.i(TAG, "PICTURE BETTER WORK ");
+                    imgUser.setImageBitmap(bmp);
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
+
+                /*
+                for(User name : objects) {
+                    Log.i(TAG, "Issue with getting PICTURES", e);
+                    ParseFile image = name.getProfileImage();
+                    Glide.with(getContext()).load(name.getProfileImage().getUrl()).into(profilePicture);
+                }
+                */
+
+                allUsers.addAll(objects);
+                adapter.notifyDataSetChanged();
             }
         });
 
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
+        query.setLimit(20);
         //ADD KEY:
         query.addDescendingOrder(User.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
@@ -142,7 +169,8 @@ public class ProfileFragment extends Fragment{
                     return;
                 }
                 for(Post user : users){
-                    Log.i(TAG, "Post: " + user.getDescription() + ", Username: " + user.getUser().getUsername());
+                    Log.i(TAG, "Profile: " + user.getDescription() + ", Username: " + user.getUser().getUsername());
+                    //Log.i(TAG, "INDEX TEST: " + users.get(0).getDescription());
                     profileUsername.setText(user.getUser().getUsername());
                 }
                 allPosts.addAll(users);

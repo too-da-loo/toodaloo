@@ -33,6 +33,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="186dp"
             android:layout_marginTop="132dp"
+            android:textSize="20sp"
             android:visibility="visible"
             tools:text="Profile" />
     </RelativeLayout>
