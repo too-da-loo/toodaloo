@@ -34,9 +34,9 @@ public class Post extends ParseObject {
       put(KEY_USER, user);
    }
 
-   public ParseObject getRestaurant() {return getParseObject(KEY_RESTNAME);}
+   public String getRestaurant() {return getString(KEY_RESTNAME);}
 
-   public void setRestaurant(ParseObject restaurant) {put (KEY_RESTNAME, restaurant);}
+   public void setRestaurant(String restaurant) {put (KEY_RESTNAME, restaurant);}
 
 
    public ParseFile getProfileImage() {return getParseFile(KEY_PROFILE_IMAGE);}

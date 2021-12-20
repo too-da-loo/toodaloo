@@ -56,7 +56,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvDescription;
-        // private TextView restName;
+        //private TextView restName;
         private ImageView ivImage;
 
 
@@ -64,7 +64,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.username);
-            //restName = itemView.findViewById(R.id.establishmentName);
+            //restName = itemView.findViewById(R.id.restaurantName);
             tvDescription = itemView.findViewById(R.id.reviewDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
 
@@ -75,7 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            //restName.setText(post.getrestName());
+            //restName.setText(post.getRestaurant());
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);

@@ -60,8 +60,6 @@ public class ProfileFragment extends Fragment{
         // Inflate the layout for this fragment
         //Profile Image:
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-      //  profilePicture = view.findViewById(R.id.profileImage);
-        //profileUsername = view.findViewById(R.id.profileUsername);
         return view;
     }
 
@@ -82,7 +80,7 @@ public class ProfileFragment extends Fragment{
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryProfile();
 
-//        //Profile Image:
+        //Profile Image:
         profilePicture = view.findViewById(R.id.profileImage);
         profileUsername = view.findViewById(R.id.profileUsername);
 
@@ -112,8 +110,6 @@ public class ProfileFragment extends Fragment{
         startActivity(i);
     }
 
-
-//    @Override
     protected void queryProfile() {
 
         ParseQuery<User> query1 = ParseQuery.getQuery(User.class);
@@ -128,7 +124,6 @@ public class ProfileFragment extends Fragment{
                     Log.e(TAG, "Pictures: Parse exception null", e);
                     return;
                 }
-                //Log.i(TAG, "INDEX TEST: " + objects.get(0).getUser().getUsername());
 
                 ImageView imgUser = (ImageView) getView().findViewById(R.id.profileImage);
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -142,13 +137,6 @@ public class ProfileFragment extends Fragment{
                     parseException.printStackTrace();
                 }
 
-                /*
-                for(User name : objects) {
-                    Log.i(TAG, "Issue with getting PICTURES", e);
-                    ParseFile image = name.getProfileImage();
-                    Glide.with(getContext()).load(name.getProfileImage().getUrl()).into(profilePicture);
-                }
-                */
 
                 allUsers.addAll(objects);
                 adapter.notifyDataSetChanged();

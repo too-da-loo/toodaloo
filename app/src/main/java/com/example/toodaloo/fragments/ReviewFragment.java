@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,7 @@ import com.example.toodaloo.PostsAdapter;
 import com.example.toodaloo.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -98,6 +101,12 @@ public class ReviewFragment extends Fragment {
     }
 
     protected void queryPosts(){
+
+
+
+
+
+
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
@@ -118,6 +127,40 @@ public class ReviewFragment extends Fragment {
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
+            }
+        });
+
+        ParseQuery<Post> query2 = ParseQuery.getQuery(Post.class);
+        query2.include(Post.KEY_RESTNAME);
+        query2.setLimit(20);
+        query2.addDescendingOrder(Post.KEY_CREATED_KEY);
+
+        query2.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> restaurant, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting restaurants", e);
+                    return;
+                }
+
+
+                TextView t = (TextView) getView().findViewById(R.id.restaurantName);
+
+
+
+                for(Post post : restaurant){
+                    ParseObject restName = post.getParseObject("restaurantName");
+                    String name;
+
+                    if(restName != null) {
+                        name = restName.getString("name");
+                        t.setText(name);
+                        Log.i(TAG, "Restaurant!!!!!!!" + name);
+                    }
+
+                }
+
+
             }
         });
     }
