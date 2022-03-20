@@ -102,11 +102,6 @@ public class ReviewFragment extends Fragment {
 
     protected void queryPosts(){
 
-
-
-
-
-
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
@@ -129,7 +124,7 @@ public class ReviewFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
-
+/*
         ParseQuery<Post> query2 = ParseQuery.getQuery(Post.class);
         query2.include(Post.KEY_RESTNAME);
         query2.setLimit(20);
@@ -143,10 +138,7 @@ public class ReviewFragment extends Fragment {
                     return;
                 }
 
-
                 TextView t = (TextView) getView().findViewById(R.id.restaurantName);
-
-
 
                 for(Post post : restaurant){
                     ParseObject restName = post.getParseObject("restaurantName");
@@ -159,10 +151,8 @@ public class ReviewFragment extends Fragment {
                     }
 
                 }
-
-
             }
         });
+        */
     }
-
 }

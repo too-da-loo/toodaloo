@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.toodaloo.BuildConfig;
 import com.example.toodaloo.MainActivity;
 import com.example.toodaloo.R;
 import com.google.android.gms.common.api.Status;
@@ -113,7 +115,7 @@ public class MapFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(getActivity());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
@@ -383,6 +385,7 @@ public class MapFragment extends Fragment {
      */
     private void openPlacesDialog() {
         // Ask the user to choose the place where they are now.
+
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
