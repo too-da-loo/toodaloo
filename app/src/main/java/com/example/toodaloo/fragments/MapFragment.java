@@ -99,6 +99,7 @@ public class MapFragment extends Fragment {
     // Used for selecting the current place.
     private static final int M_MAX_ENTRIES = 10;
     private String[] likelyPlaceNames;
+    private String[] likelyPlaceRating;
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
@@ -310,8 +311,10 @@ public class MapFragment extends Fragment {
 
         if (locationPermissionGranted) {
             // Use fields to define the data types to return.
-            List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,
+            List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
                     Place.Field.LAT_LNG);
+
+            //Place.Field.OPENING_HOURS
 
             // Use the builder to create a FindCurrentPlaceRequest.
             FindCurrentPlaceRequest request =
@@ -338,6 +341,7 @@ public class MapFragment extends Fragment {
 
                         int i = 0;
                         likelyPlaceNames = new String[count];
+                        likelyPlaceRating = new String[count];
                         likelyPlaceAddresses = new String[count];
                         likelyPlaceAttributions = new List[count];
                         likelyPlaceLatLngs = new LatLng[count];
@@ -345,6 +349,7 @@ public class MapFragment extends Fragment {
                         for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
                             // Build a list of likely places to show the user.
                             likelyPlaceNames[i] = placeLikelihood.getPlace().getName();
+                            likelyPlaceRating[i] = String.valueOf(placeLikelihood.getPlace().getRating());
                             likelyPlaceAddresses[i] = placeLikelihood.getPlace().getAddress();
                             likelyPlaceAttributions[i] = placeLikelihood.getPlace()
                                     .getAttributions();
@@ -391,7 +396,8 @@ public class MapFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 // The "which" argument contains the position of the selected item.
                 LatLng markerLatLng = likelyPlaceLatLngs[which];
-                String markerSnippet = likelyPlaceAddresses[which];
+                String markerSnippet = likelyPlaceAddresses[which] + "\n" + likelyPlaceRating[which];
+                //String markerRating = likelyPlaceRating[which];
                 if (likelyPlaceAttributions[which] != null) {
                     markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
                 }
