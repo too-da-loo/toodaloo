@@ -170,6 +170,15 @@ public class MapFragment extends Fragment {
                         googleMap.addMarker(markerOptions);
                     }
                 });
+
+                //Click listener for Marker Info Window
+                googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(@NonNull Marker marker) {
+                        Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 // Prompt the user for permission.
                 getLocationPermission();
 
