@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.toodaloo.BuildConfig;
 import com.example.toodaloo.MainActivity;
@@ -176,6 +177,19 @@ public class MapFragment extends Fragment {
                     @Override
                     public void onInfoWindowClick(@NonNull Marker marker) {
                         Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
+
+                        // Go to RestaurantFragment upon Info Window click
+                        Fragment newFragment = new RestaurantFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                        // Replace whatever is in the fragment container view with this fragment,
+                        // Add the transaction to the back stack
+                        transaction.replace(R.id.flContainer, newFragment);
+                        transaction.addToBackStack(null);
+
+                        // Commit the transaction
+                        transaction.commit();
+
                     }
                 });
 
