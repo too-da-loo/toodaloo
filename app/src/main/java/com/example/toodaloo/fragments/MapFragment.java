@@ -190,7 +190,7 @@ public class MapFragment extends Fragment {
 
                         // Go to RestaurantFragment upon Info Window click
                         Fragment newFragment = new RestaurantFragment();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
 
                         // Replace whatever is in the fragment container view with this fragment,
                         // Add the transaction to the back stack

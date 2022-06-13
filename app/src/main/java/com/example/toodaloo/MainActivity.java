@@ -50,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ReviewFragment();
                         break;
                 }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .commit();
                 return true;
             }
         });
