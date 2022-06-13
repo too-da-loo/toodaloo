@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.toodaloo.BuildConfig;
 import com.example.toodaloo.MainActivity;
+import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -104,6 +106,9 @@ public class MapFragment extends Fragment {
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
+    private static int dialogPosition;
+
+    MarkerDetails markerDetails = new MarkerDetails();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -151,6 +156,7 @@ public class MapFragment extends Fragment {
                         return null;
                     }
                 });
+
                 //When map is loaded
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -177,6 +183,10 @@ public class MapFragment extends Fragment {
                     @Override
                     public void onInfoWindowClick(@NonNull Marker marker) {
                         Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
+
+                        Bundle result = new Bundle();
+                        result.putParcelable("bundleKey", markerDetails);
+                        getParentFragmentManager().setFragmentResult("requestKey", result);
 
                         // Go to RestaurantFragment upon Info Window click
                         Fragment newFragment = new RestaurantFragment();
@@ -418,9 +428,19 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // The "which" argument contains the position of the selected item.
+                //dialogPosition=which;
+
+                //Placing marker information into custom class to retrieve outside of this class
+                markerDetails.setPlaceName(likelyPlaceNames[which]);
+                markerDetails.setPlaceAddress(likelyPlaceAddresses[which]);
+                markerDetails.setPlaceRating(likelyPlaceRating[which]);
+
+                //Log.i(TAG, markerDetails.getPlaceName());
+
+
                 LatLng markerLatLng = likelyPlaceLatLngs[which];
                 String markerSnippet = likelyPlaceAddresses[which] + "\n" + likelyPlaceRating[which];
-                //String markerRating = likelyPlaceRating[which];
+
                 if (likelyPlaceAttributions[which] != null) {
                     markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
                 }
