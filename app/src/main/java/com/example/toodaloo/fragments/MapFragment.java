@@ -106,7 +106,6 @@ public class MapFragment extends Fragment {
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
-    private static int dialogPosition;
 
     MarkerDetails markerDetails = new MarkerDetails();
 
@@ -174,7 +173,7 @@ public class MapFragment extends Fragment {
                                 latLng,10
                         ));
                         //Add marker on map
-                        googleMap.addMarker(markerOptions);
+                        //googleMap.addMarker(markerOptions);
                     }
                 });
 
@@ -182,7 +181,7 @@ public class MapFragment extends Fragment {
                 googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(@NonNull Marker marker) {
-                        Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
 
                         Bundle result = new Bundle();
                         result.putParcelable("bundleKey", markerDetails);
@@ -427,9 +426,8 @@ public class MapFragment extends Fragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // The "which" argument contains the position of the selected item.
-                //dialogPosition=which;
 
+                // The "which" argument contains the position of the selected item.
                 //Placing marker information into custom class to retrieve outside of this class
                 markerDetails.setPlaceName(likelyPlaceNames[which]);
                 markerDetails.setPlaceAddress(likelyPlaceAddresses[which]);

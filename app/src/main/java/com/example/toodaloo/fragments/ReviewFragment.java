@@ -53,7 +53,7 @@ public class ReviewFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_feed, container, false);
     }
-
+/*
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu,@NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.compose_button_feed, menu);
@@ -72,7 +72,7 @@ public class ReviewFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -97,7 +97,7 @@ public class ReviewFragment extends Fragment {
         queryPosts();
 
         //Actionbar:
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
     }
 
     protected void queryPosts(){
