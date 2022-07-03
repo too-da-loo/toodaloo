@@ -9,7 +9,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,10 +28,20 @@ import com.example.toodaloo.PostsAdapter;
 import com.example.toodaloo.R;
 import com.example.toodaloo.User;
 import com.example.toodaloo.UserAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantFragment extends Fragment {
+    private RecyclerView rvFeed;
+    public static final String TAG = "RestaurantFragment";
+
+    SwipeRefreshLayout swipeContainer;
+    protected PostsAdapter adapter;
+    protected List<Post> allPosts;
 
     MarkerDetails markerDetails = new MarkerDetails();
     private TextView placeName;
@@ -86,7 +99,50 @@ public class RestaurantFragment extends Fragment {
         placeAddress = view.findViewById(R.id.restroomAddressInfo);
         placeRating = view.findViewById(R.id.ratingBar);
 
+        rvFeed = view.findViewById(R.id.rvRestaurant);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() { queryPosts(); }
+        });
+
+
+        allPosts = new ArrayList<>();
+        adapter = new PostsAdapter(getContext(), allPosts);
+        rvFeed.setAdapter(adapter);
+        rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
+        queryPosts();
+
         setHasOptionsMenu(true);
     }
 
+    protected void queryPosts(){
+
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.setLimit(20);
+        //ADD KEY:
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
+
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for(Post post : posts){
+                    Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
+                }
+                adapter.clear();
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+    }
 }

@@ -107,8 +107,6 @@ public class MapFragment extends Fragment {
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
 
-    MarkerDetails markerDetails = new MarkerDetails();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -184,7 +182,7 @@ public class MapFragment extends Fragment {
                         //Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
 
                         Bundle result = new Bundle();
-                        result.putParcelable("bundleKey", markerDetails);
+                        result.putParcelable("bundleKey", (Parcelable) marker.getTag());
                         getParentFragmentManager().setFragmentResult("requestKey", result);
 
                         // Go to RestaurantFragment upon Info Window click
@@ -426,6 +424,7 @@ public class MapFragment extends Fragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                MarkerDetails markerDetails = new MarkerDetails();
 
                 // The "which" argument contains the position of the selected item.
                 //Placing marker information into custom class to retrieve outside of this class
@@ -445,10 +444,12 @@ public class MapFragment extends Fragment {
 
                 // Add a marker for the selected place, with an info window
                 // showing information about that place.
-                map.addMarker(new MarkerOptions()
+                Marker marker = map.addMarker(new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
                         .snippet(markerSnippet));
+
+                marker.setTag(markerDetails);
 
                 // Position the map's camera at the location of the marker.
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
