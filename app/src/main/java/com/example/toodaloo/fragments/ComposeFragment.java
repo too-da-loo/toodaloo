@@ -16,13 +16,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
+import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.Post;
 import com.example.toodaloo.R;
 import com.parse.ParseException;
@@ -35,6 +38,8 @@ import java.io.File;
 public class ComposeFragment extends Fragment {
     public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+
+    private TextView tvPlaceName;
     private EditText etDescription;
     private Button btnCaptureImage;
     private ImageView ivPostImage;
@@ -42,9 +47,22 @@ public class ComposeFragment extends Fragment {
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    MarkerDetails markerDetails = new MarkerDetails();
 
     public ComposeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("requestKey2", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                markerDetails = result.getParcelable("bundleKey2");
+                tvPlaceName.setText(markerDetails.getPlaceName());
+            }
+        });
     }
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -60,6 +78,7 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvPlaceName = view.findViewById(R.id.tvPlaceName);
         etDescription = view.findViewById(R.id.etDescription);
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         ivPostImage = view.findViewById(R.id.ivPostImage);
@@ -75,6 +94,7 @@ public class ComposeFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String placeName = tvPlaceName.getText().toString();
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description can't be empty", Toast.LENGTH_SHORT).show();
@@ -86,7 +106,7 @@ public class ComposeFragment extends Fragment {
                 }
                 Toast.makeText(getContext(), "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                savePost(placeName, description, currentUser, photoFile);
             }
         });
     }
@@ -143,8 +163,9 @@ public class ComposeFragment extends Fragment {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
-    private void savePost(String description, ParseUser currentUser, File photoFile) {
+    private void savePost(String placeName, String description, ParseUser currentUser, File photoFile) {
         Post post = new Post();
+        post.setPlaceName(placeName);
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);

@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +31,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.toodaloo.BuildConfig;
 import com.example.toodaloo.MainActivity;
+import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -98,6 +101,7 @@ public class MapFragment extends Fragment {
 
     // Used for selecting the current place.
     private static final int M_MAX_ENTRIES = 10;
+    private String[] likelyPlaceID;
     private String[] likelyPlaceNames;
     private String[] likelyPlaceRating;
     private String[] likelyPlaceAddresses;
@@ -150,6 +154,7 @@ public class MapFragment extends Fragment {
                         return null;
                     }
                 });
+
                 //When map is loaded
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -167,9 +172,35 @@ public class MapFragment extends Fragment {
                                 latLng,10
                         ));
                         //Add marker on map
-                        googleMap.addMarker(markerOptions);
+                        //googleMap.addMarker(markerOptions);
                     }
                 });
+
+                //Click listener for Marker Info Window
+                googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(@NonNull Marker marker) {
+                        //Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
+
+                        Bundle result = new Bundle();
+                        result.putParcelable("bundleKey", (Parcelable) marker.getTag());
+                        getParentFragmentManager().setFragmentResult("requestKey", result);
+
+                        // Go to RestaurantFragment upon Info Window click
+                        Fragment newFragment = new RestaurantFragment();
+                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+                        // Replace whatever is in the fragment container view with this fragment,
+                        // Add the transaction to the back stack
+                        transaction.replace(R.id.flContainer, newFragment);
+                        transaction.addToBackStack(null);
+
+                        // Commit the transaction
+                        transaction.commit();
+
+                    }
+                });
+
                 // Prompt the user for permission.
                 getLocationPermission();
 
@@ -311,7 +342,7 @@ public class MapFragment extends Fragment {
 
         if (locationPermissionGranted) {
             // Use fields to define the data types to return.
-            List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
+            List<Place.Field> placeFields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
                     Place.Field.LAT_LNG);
 
             //Place.Field.OPENING_HOURS
@@ -340,6 +371,7 @@ public class MapFragment extends Fragment {
                         }
 
                         int i = 0;
+                        likelyPlaceID = new String[count];
                         likelyPlaceNames = new String[count];
                         likelyPlaceRating = new String[count];
                         likelyPlaceAddresses = new String[count];
@@ -348,6 +380,7 @@ public class MapFragment extends Fragment {
 
                         for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
                             // Build a list of likely places to show the user.
+                            likelyPlaceID[i] = placeLikelihood.getPlace().getId();
                             likelyPlaceNames[i] = placeLikelihood.getPlace().getName();
                             likelyPlaceRating[i] = String.valueOf(placeLikelihood.getPlace().getRating());
                             likelyPlaceAddresses[i] = placeLikelihood.getPlace().getAddress();
@@ -394,20 +427,33 @@ public class MapFragment extends Fragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                MarkerDetails markerDetails = new MarkerDetails();
+
                 // The "which" argument contains the position of the selected item.
+                //Placing marker information into custom class to retrieve outside of this class
+                markerDetails.setPlaceID(likelyPlaceID[which]);
+                markerDetails.setPlaceName(likelyPlaceNames[which]);
+                markerDetails.setPlaceAddress(likelyPlaceAddresses[which]);
+                markerDetails.setPlaceRating(likelyPlaceRating[which]);
+
+                //Log.i(TAG, markerDetails.getPlaceName());
+
+
                 LatLng markerLatLng = likelyPlaceLatLngs[which];
                 String markerSnippet = likelyPlaceAddresses[which] + "\n" + likelyPlaceRating[which];
-                //String markerRating = likelyPlaceRating[which];
+
                 if (likelyPlaceAttributions[which] != null) {
                     markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
                 }
 
                 // Add a marker for the selected place, with an info window
                 // showing information about that place.
-                map.addMarker(new MarkerOptions()
+                Marker marker = map.addMarker(new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
                         .snippet(markerSnippet));
+
+                marker.setTag(markerDetails);
 
                 // Position the map's camera at the location of the marker.
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
