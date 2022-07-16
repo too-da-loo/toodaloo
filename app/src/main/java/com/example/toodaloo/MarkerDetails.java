@@ -7,6 +7,7 @@ public class MarkerDetails implements Parcelable {
     private String placeName;
     private String placeRating;
     private String placeAddress;
+    private String placeID;
 
     public MarkerDetails(){
     }
@@ -15,6 +16,7 @@ public class MarkerDetails implements Parcelable {
         placeName = in.readString();
         placeRating = in.readString();
         placeAddress = in.readString();
+        placeID = in.readString();
     }
 
     public static final Creator<MarkerDetails> CREATOR = new Creator<MarkerDetails>() {
@@ -53,6 +55,10 @@ public class MarkerDetails implements Parcelable {
         this.placeAddress=placeAddress;
     }
 
+    public String getPlaceID() {return placeID; }
+
+    public void setPlaceID(String placeID) { this.placeID=placeID; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,5 +69,6 @@ public class MarkerDetails implements Parcelable {
         dest.writeString(placeName);
         dest.writeString(placeRating);
         dest.writeString(placeAddress);
+        dest.writeString(placeID);
     }
 }

@@ -101,6 +101,7 @@ public class MapFragment extends Fragment {
 
     // Used for selecting the current place.
     private static final int M_MAX_ENTRIES = 10;
+    private String[] likelyPlaceID;
     private String[] likelyPlaceNames;
     private String[] likelyPlaceRating;
     private String[] likelyPlaceAddresses;
@@ -341,7 +342,7 @@ public class MapFragment extends Fragment {
 
         if (locationPermissionGranted) {
             // Use fields to define the data types to return.
-            List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
+            List<Place.Field> placeFields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
                     Place.Field.LAT_LNG);
 
             //Place.Field.OPENING_HOURS
@@ -370,6 +371,7 @@ public class MapFragment extends Fragment {
                         }
 
                         int i = 0;
+                        likelyPlaceID = new String[count];
                         likelyPlaceNames = new String[count];
                         likelyPlaceRating = new String[count];
                         likelyPlaceAddresses = new String[count];
@@ -378,6 +380,7 @@ public class MapFragment extends Fragment {
 
                         for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
                             // Build a list of likely places to show the user.
+                            likelyPlaceID[i] = placeLikelihood.getPlace().getId();
                             likelyPlaceNames[i] = placeLikelihood.getPlace().getName();
                             likelyPlaceRating[i] = String.valueOf(placeLikelihood.getPlace().getRating());
                             likelyPlaceAddresses[i] = placeLikelihood.getPlace().getAddress();
@@ -428,6 +431,7 @@ public class MapFragment extends Fragment {
 
                 // The "which" argument contains the position of the selected item.
                 //Placing marker information into custom class to retrieve outside of this class
+                markerDetails.setPlaceID(likelyPlaceID[which]);
                 markerDetails.setPlaceName(likelyPlaceNames[which]);
                 markerDetails.setPlaceAddress(likelyPlaceAddresses[which]);
                 markerDetails.setPlaceRating(likelyPlaceRating[which]);

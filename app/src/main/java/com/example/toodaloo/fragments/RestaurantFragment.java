@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,6 +63,11 @@ public class RestaurantFragment extends Fragment {
                 placeName.setText(markerDetails.getPlaceName());
                 placeAddress.setText(markerDetails.getPlaceAddress());
                 placeRating.setRating(Float.parseFloat(markerDetails.getPlaceRating()));
+
+
+                // Go to RestaurantFragment upon Info Window click
+                Fragment newFragment = new ComposeFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             }
         });
     }
@@ -82,11 +88,26 @@ public class RestaurantFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.compose_action) {
+
+            Bundle result = new Bundle();
+            result.putParcelable("bundleKey2", (Parcelable) markerDetails);
+            getParentFragmentManager().setFragmentResult("requestKey2", result);
+
+            // Go to RestaurantFragment upon Info Window click
+            Fragment newFragment = new ComposeFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.flContainer, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();
+
+            /*
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             ComposeFragment composeFragment = new ComposeFragment();
             transaction.replace(R.id.flContainer, composeFragment);
-            transaction.commit();
+            transaction.commit();*/
             return true;
         }
         return super.onOptionsItemSelected(item);

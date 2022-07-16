@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ComposeFragment">
 
+    <TextView
+        android:id="@+id/tvPlaceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:hint="Place Name" />
+
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"

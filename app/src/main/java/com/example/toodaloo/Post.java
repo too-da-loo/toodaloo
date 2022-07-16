@@ -1,5 +1,6 @@
 package com.example.toodaloo;
 
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -7,11 +8,12 @@ import com.parse.ParseUser;
 
 @ParseClassName("Post")
 public class Post extends ParseObject {
-   public static final  String KEY_DESCRIPTION = "description";
-   public static final  String KEY_IMAGE = "image";
-   public static final  String KEY_USER = "user";
-   public static final  String KEY_CREATED_KEY = "createdAt";
-   public static final  String KEY_RESTNAME = "restaurantName";
+   public static final String KEY_DESCRIPTION = "description";
+   public static final String KEY_IMAGE = "image";
+   public static final String KEY_USER = "user";
+   public static final String KEY_CREATED_KEY = "createdAt";
+   public static final String KEY_PLACE_NAME = "placeName";
+   public static final String KEY_PLACE_ID = "placeID";
    public static final String KEY_PROFILE_IMAGE = "profilePicture";
 
    public String getDescription(){
@@ -34,10 +36,13 @@ public class Post extends ParseObject {
       put(KEY_USER, user);
    }
 
-   public String getRestaurant() {return getString(KEY_RESTNAME);}
+   public String getPlaceName() {return getString(KEY_PLACE_NAME);}
 
-   public void setRestaurant(String restaurant) {put (KEY_RESTNAME, restaurant);}
+   public void setPlaceName(String placeName) {put (KEY_PLACE_NAME, placeName);}
 
+   public String getPlaceID() {return getString(KEY_PLACE_ID);}
+
+   public void setPlaceID(String placeID) {put (KEY_PLACE_NAME, placeID);}
 
    public ParseFile getProfileImage() {return getParseFile(KEY_PROFILE_IMAGE);}
 
