@@ -100,7 +100,7 @@ public class MapFragment extends Fragment {
     private static final String KEY_LOCATION = "location";
 
     // Used for selecting the current place.
-    private static final int M_MAX_ENTRIES = 10;
+    private static final int M_MAX_ENTRIES = 20;
     private String[] likelyPlaceID;
     private String[] likelyPlaceNames;
     private String[] likelyPlaceRating;
@@ -197,7 +197,6 @@ public class MapFragment extends Fragment {
 
                         // Commit the transaction
                         transaction.commit();
-
                     }
                 });
 
@@ -211,9 +210,7 @@ public class MapFragment extends Fragment {
                 getDeviceLocation();
             }
         });
-
         return view;
-
     }
 
     @Override
@@ -489,6 +486,5 @@ public class MapFragment extends Fragment {
             Log.e("Exception: %s", e.getMessage());
         }
     }
-
 }
 

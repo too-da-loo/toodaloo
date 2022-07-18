@@ -49,34 +49,15 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_feed, container, false);
     }
-/*
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu,@NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.compose_button_feed, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.compose_action) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            ComposeFragment composeFragment = new ComposeFragment();
-            transaction.replace(R.id.flContainer, composeFragment);
-            transaction.commit();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-*/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvFeed = view.findViewById(R.id.rvFeed);
+
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -89,15 +70,11 @@ public class ReviewFragment extends Fragment {
             }
         });
 
-
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
-
-        //Actionbar:
-        //setHasOptionsMenu(true);
     }
 
     protected void queryPosts(){
@@ -124,35 +101,5 @@ public class ReviewFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
-/*
-        ParseQuery<Post> query2 = ParseQuery.getQuery(Post.class);
-        query2.include(Post.KEY_RESTNAME);
-        query2.setLimit(20);
-        query2.addDescendingOrder(Post.KEY_CREATED_KEY);
-
-        query2.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> restaurant, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting restaurants", e);
-                    return;
-                }
-
-                TextView t = (TextView) getView().findViewById(R.id.restaurantName);
-
-                for(Post post : restaurant){
-                    ParseObject restName = post.getParseObject("restaurantName");
-                    String name;
-
-                    if(restName != null) {
-                        name = restName.getString("name");
-                        t.setText(name);
-                        Log.i(TAG, "Restaurant!!!!!!!" + name);
-                    }
-
-                }
-            }
-        });
-        */
     }
 }
