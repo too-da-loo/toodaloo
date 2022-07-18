@@ -113,6 +113,8 @@ public class ProfileFragment extends Fragment{
 
     protected void queryProfile() {
 
+        //This query is used to get the profile picture of the current user
+        //from the User database, can eventually combine into one query
         ParseQuery<User> query1 = ParseQuery.getQuery(User.class);
         query1.include(User.KEY_USERNAME);
         query1.whereEqualTo(User.KEY_USERNAME, ParseUser.getCurrentUser());
@@ -144,6 +146,7 @@ public class ProfileFragment extends Fragment{
             }
         });
 
+        //This query is used to retrieve a feed of posts from the user
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());

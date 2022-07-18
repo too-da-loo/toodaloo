@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.Post;
@@ -32,6 +33,7 @@ import com.example.toodaloo.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,6 @@ public class RestaurantFragment extends Fragment {
                 placeAddress.setText(markerDetails.getPlaceAddress());
                 placeRating.setRating(Float.parseFloat(markerDetails.getPlaceRating()));
 
-
                 // Go to RestaurantFragment upon Info Window click
                 Fragment newFragment = new ComposeFragment();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -88,7 +89,6 @@ public class RestaurantFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.compose_action) {
-
             Bundle result = new Bundle();
             result.putParcelable("bundleKey2", (Parcelable) markerDetails);
             getParentFragmentManager().setFragmentResult("requestKey2", result);
@@ -101,13 +101,6 @@ public class RestaurantFragment extends Fragment {
 
             // Commit the transaction
             transaction.commit();
-
-            /*
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            ComposeFragment composeFragment = new ComposeFragment();
-            transaction.replace(R.id.flContainer, composeFragment);
-            transaction.commit();*/
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -116,11 +109,12 @@ public class RestaurantFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         placeName = view.findViewById(R.id.profileEstablishmentName);
         placeAddress = view.findViewById(R.id.restroomAddressInfo);
         placeRating = view.findViewById(R.id.ratingBar);
-
         rvFeed = view.findViewById(R.id.rvRestaurant);
+
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -131,24 +125,25 @@ public class RestaurantFragment extends Fragment {
             public void onRefresh() { queryPosts(); }
         });
 
-
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
-
         setHasOptionsMenu(true);
     }
 
     protected void queryPosts(){
-
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.setLimit(20);
-        //ADD KEY:
-        query.addDescendingOrder(Post.KEY_CREATED_KEY);
+        query.include(Post.KEY_PLACE_NAME);
 
+        //Constraint to only display posts of the selected location
+        query.whereEqualTo(Post.KEY_PLACE_NAME, placeName.getText().toString());
+        query.setLimit(20);
+
+        //Filters the order of the posts based on the time created key (newest on top)
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -157,7 +152,7 @@ public class RestaurantFragment extends Fragment {
                     return;
                 }
                 for(Post post : posts){
-                    Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getPlaceName());
                 }
                 adapter.clear();
                 allPosts.addAll(posts);
