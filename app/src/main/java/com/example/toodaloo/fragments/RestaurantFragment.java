@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,20 +21,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.Post;
 import com.example.toodaloo.PostsAdapter;
 import com.example.toodaloo.R;
-import com.example.toodaloo.User;
-import com.example.toodaloo.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +46,7 @@ public class RestaurantFragment extends Fragment {
     private TextView placeName;
     private TextView placeAddress;
     private RatingBar placeRating;
+    int counter = 0;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -134,6 +129,17 @@ public class RestaurantFragment extends Fragment {
         queryPosts();
         adapter.notifyDataSetChanged();
 
+        //Bandaid solution in making sure RecyclerView isn't empty upon startup
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                if(counter < 1){
+                    queryPosts();
+                    super.onChanged();
+                    counter++;
+                }
+            }
+        });
         setHasOptionsMenu(true);
     }
 
@@ -157,9 +163,9 @@ public class RestaurantFragment extends Fragment {
                     return;
                 }
                 for(Post post : posts){
-                    ParseObject user = post.getParseObject(Post.KEY_USER);
                     Log.i(TAG, "Post: " + post.getPlaceName());
-                    Log.i(TAG, "User: " + user.getString("email"));
+                    //ParseObject user = post.getParseObject(Post.KEY_USER);
+                    //Log.i(TAG, "User: " + user.getString("email"));
 
                 }
                 adapter.clear();

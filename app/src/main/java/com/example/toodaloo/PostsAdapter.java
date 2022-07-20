@@ -73,9 +73,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         }
 
         public void bind(Post post) {
-            //Create a User class to get relational data from Post
+            //Create a User class to get relational data from Post object
             ParseObject user = post.getParseObject(Post.KEY_USER);
-            //String email = user.getString("email");
             ParseFile profileImage = user.getParseFile("profilePicture");
             if (profileImage != null) {
                 Glide.with(context).load(profileImage.getUrl()).into(ivProfilePicture);
