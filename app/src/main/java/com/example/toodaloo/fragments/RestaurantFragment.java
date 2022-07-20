@@ -144,8 +144,6 @@ public class RestaurantFragment extends Fragment {
     }
 
     protected void queryPosts(){
-        //ParseQuery<User> innerQuery = ParseQuery.getQuery(User.class);
-        //innerQuery.where
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
 
@@ -158,20 +156,23 @@ public class RestaurantFragment extends Fragment {
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
+                
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
+
                 for(Post post : posts){
                     Log.i(TAG, "Post: " + post.getPlaceName());
                     //ParseObject user = post.getParseObject(Post.KEY_USER);
                     //Log.i(TAG, "User: " + user.getString("email"));
-
                 }
+
                 adapter.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
+
             }
         });
     }
