@@ -32,7 +32,9 @@ import com.example.toodaloo.User;
 import com.example.toodaloo.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -130,13 +132,16 @@ public class RestaurantFragment extends Fragment {
         rvFeed.setAdapter(adapter);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
+        adapter.notifyDataSetChanged();
+
         setHasOptionsMenu(true);
     }
 
     protected void queryPosts(){
+        //ParseQuery<User> innerQuery = ParseQuery.getQuery(User.class);
+        //innerQuery.where
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.include(Post.KEY_PLACE_NAME);
 
         //Constraint to only display posts of the selected location
         query.whereEqualTo(Post.KEY_PLACE_NAME, placeName.getText().toString());
@@ -152,7 +157,10 @@ public class RestaurantFragment extends Fragment {
                     return;
                 }
                 for(Post post : posts){
+                    ParseObject user = post.getParseObject(Post.KEY_USER);
                     Log.i(TAG, "Post: " + post.getPlaceName());
+                    Log.i(TAG, "User: " + user.getString("email"));
+
                 }
                 adapter.clear();
                 allPosts.addAll(posts);
@@ -162,3 +170,15 @@ public class RestaurantFragment extends Fragment {
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

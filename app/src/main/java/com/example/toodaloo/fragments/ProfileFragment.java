@@ -112,7 +112,6 @@ public class ProfileFragment extends Fragment{
     }
 
     protected void queryProfile() {
-
         //This query is used to get the profile picture of the current user
         //from the User database, can eventually combine into one query
         ParseQuery<User> query1 = ParseQuery.getQuery(User.class);
@@ -139,8 +138,6 @@ public class ProfileFragment extends Fragment{
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
                 }
-
-
                 allUsers.addAll(objects);
                 adapter.notifyDataSetChanged();
             }

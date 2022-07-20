@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
 
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     public int getItemCount() {
         return posts.size();
     }
+
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
@@ -58,8 +60,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private TextView tvDescription;
         private TextView tvPlaceName;
         private ImageView ivImage;
-
-
+        private ImageView ivProfilePicture;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,11 +68,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvPlaceName = itemView.findViewById(R.id.placeName);
             tvDescription = itemView.findViewById(R.id.reviewDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
+            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
 
         }
 
-
         public void bind(Post post) {
+            //Create a User class to get relational data from Post
+            ParseObject user = post.getParseObject(Post.KEY_USER);
+            //String email = user.getString("email");
+            ParseFile profileImage = user.getParseFile("profilePicture");
+            if (profileImage != null) {
+                Glide.with(context).load(profileImage.getUrl()).into(ivProfilePicture);
+            }
+
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText("@" + post.getUser().getUsername());
