@@ -58,7 +58,7 @@ Post
 Here's a walkthrough of implemented user stories:
 
 <img src='toodaloo.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
-<img src='toodaloo2.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
+<img src='toodaloo2' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 <img src='toodaloo3.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 <img src='toodaloo4.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
