@@ -1,7 +1,7 @@
-Original App Design Project- Toodaloo
+Original App Design Project- toodaloo
 ===
 
-# Toodaloo
+# toodaloo
 
 ## Overview
 ### Description
