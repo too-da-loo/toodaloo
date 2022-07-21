@@ -3,15 +3,10 @@ Original App Design Project- Toodaloo
 
 # Toodaloo
 
-## Table of Contents
-1. [Overview](#Overview)
-1. [Product Spec](#Product-Spec)
-1. [Wireframes](#Wireframes)
-2. [Schema](#Schema)
-
 ## Overview
 ### Description
 Application that assists users in locating restrooms within a set radius and other filters. Filters will include the restroom's rating, style of restroom (single room or multiple stalls), Gender neutral and LGBTQ Friendly, and whether the restroom has a Diaper Changing Station. The application will feature other amenities such as Bathroom Codes for the toilet. Users will simply need to press a single button on the screen, which will display a list of bathrooms based on their current location.
+
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
@@ -21,7 +16,6 @@ Application that assists users in locating restrooms within a set radius and oth
 * Market: Anyone can use this app
 * Habit: Frequent. Especially for travelers.
 * Scope: This app will be challenging to implement but we will look at the lab assignments to help us. 
-
 
 **Tab Navigation** (Tab to Screen)
 
@@ -34,6 +28,7 @@ Application that assists users in locating restrooms within a set radius and oth
 <img src="https://github.com/too-da-loo/toodaloo/blob/main/Wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
+
 
 ### Models
 User
