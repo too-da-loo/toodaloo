@@ -22,7 +22,8 @@
         </provider>
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +41,8 @@
         -->
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:screenOrientation="locked"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

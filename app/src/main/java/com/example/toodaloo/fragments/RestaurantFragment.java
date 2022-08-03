@@ -156,7 +156,7 @@ public class RestaurantFragment extends Fragment {
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
-                
+
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
