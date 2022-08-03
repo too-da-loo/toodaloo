@@ -255,8 +255,6 @@ public class MapFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-
-
     private void getDeviceLocation(){
         /*
          * Get the best and most recent location of the device, which may be null in rare
@@ -450,6 +448,7 @@ public class MapFragment extends Fragment {
                         .position(markerLatLng)
                         .snippet(markerSnippet));
 
+                marker.showInfoWindow();
                 marker.setTag(markerDetails);
 
                 // Position the map's camera at the location of the marker.
