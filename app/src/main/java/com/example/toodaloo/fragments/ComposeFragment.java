@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.toodaloo.MarkerDetails;
 import com.example.toodaloo.Post;
@@ -107,6 +108,18 @@ public class ComposeFragment extends Fragment {
                 Toast.makeText(getContext(), "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(placeName, description, currentUser, photoFile);
+
+                // Go back to MapFragment after submitting post
+                Fragment newFragment = new MapFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+                // Replace whatever is in the fragment container view with this fragment,
+                // Add the transaction to the back stack
+                transaction.replace(R.id.flContainer, newFragment);
+                transaction.addToBackStack(null);
+
+                // Commit the transaction
+                transaction.commit();
             }
         });
     }

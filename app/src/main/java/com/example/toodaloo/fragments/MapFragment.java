@@ -79,8 +79,6 @@ public class MapFragment extends Fragment {
     private static final String TAG = "MapFragment";
     private GoogleMap map;
     private CameraPosition cameraPosition;
-    //SearchView searchView;
-
     private PlacesClient placesClient;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -100,7 +98,7 @@ public class MapFragment extends Fragment {
     private static final String KEY_LOCATION = "location";
 
     // Used for selecting the current place.
-    private static final int M_MAX_ENTRIES = 20;
+    private static final int M_MAX_ENTRIES = 25;
     private String[] likelyPlaceID;
     private String[] likelyPlaceNames;
     private String[] likelyPlaceRating;
@@ -171,8 +169,6 @@ public class MapFragment extends Fragment {
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                                 latLng,10
                         ));
-                        //Add marker on map
-                        //googleMap.addMarker(markerOptions);
                     }
                 });
 
@@ -180,8 +176,6 @@ public class MapFragment extends Fragment {
                 googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(@NonNull Marker marker) {
-                        //Toast.makeText(getContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
-
                         Bundle result = new Bundle();
                         result.putParcelable("bundleKey", (Parcelable) marker.getTag());
                         getParentFragmentManager().setFragmentResult("requestKey", result);
@@ -449,6 +443,7 @@ public class MapFragment extends Fragment {
                         .snippet(markerSnippet));
 
                 marker.showInfoWindow();
+                //Placing our custom markerDetails class into the marker's tag field
                 marker.setTag(markerDetails);
 
                 // Position the map's camera at the location of the marker.

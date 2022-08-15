@@ -62,10 +62,6 @@ public class RestaurantFragment extends Fragment {
                 placeName.setText(markerDetails.getPlaceName());
                 placeAddress.setText(markerDetails.getPlaceAddress());
                 placeRating.setRating(Float.parseFloat(markerDetails.getPlaceRating()));
-
-                // Go to RestaurantFragment upon Info Window click
-                Fragment newFragment = new ComposeFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             }
         });
     }
@@ -77,6 +73,7 @@ public class RestaurantFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_restaurant, container, false);
     }
 
+    //Creating the compose button menu item to bring us to the ComposeFragment
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.compose_button_feed, menu);
