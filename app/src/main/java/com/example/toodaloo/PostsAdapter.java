@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,7 +63,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private TextView tvPlaceName;
         private ImageView ivImage;
         private ImageView ivProfilePicture;
-        private Button btnSeeMore;
+        private ToggleButton btnSeeMore;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -77,7 +78,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             btnSeeMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ivImage.setVisibility(View.VISIBLE);
+                    if(btnSeeMore.isChecked()){
+                        ivImage.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        ivImage.setVisibility(View.GONE);
+                    }
                 }
             });
         }

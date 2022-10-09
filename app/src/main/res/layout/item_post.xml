@@ -54,14 +54,15 @@
             android:layout_marginLeft="10dp"
             tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
 
-        <Button
+        <ToggleButton
             android:id="@+id/btnSeeMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/reviewDescription"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:text="See More"
+            android:layout_marginTop="5dp"
+            android:textOff="See More"
+            android:textOn="See Less"
             android:textAlignment="center" />
 
         <ImageView

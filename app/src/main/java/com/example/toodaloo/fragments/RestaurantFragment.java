@@ -61,6 +61,8 @@ public class RestaurantFragment extends Fragment {
                 markerDetails = bundle.getParcelable("bundleKey");
                 placeName.setText(markerDetails.getPlaceName());
                 placeAddress.setText(markerDetails.getPlaceAddress());
+
+                //Some ratings may be null, need to handle this exception
                 placeRating.setRating(Float.parseFloat(markerDetails.getPlaceRating()));
             }
         });
