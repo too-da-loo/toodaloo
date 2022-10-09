@@ -1,47 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/ivProfilePicture"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true" />
-
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ivProfilePicture"
-        android:textSize="20sp"
-        tools:text="UserName" />
-
-    <TextView
-        android:id="@+id/placeName"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_toRightOf="@+id/ivProfilePicture"
-        tools:text="AppleBees" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/reviewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivProfilePicture"
-        android:layout_marginTop="10dp"
-        tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="56dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
 
-    <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_below="@id/reviewDescription"
-        android:layout_marginBottom="50dp"
-        android:scaleType="centerInside"
-        tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/ivProfilePicture"
+            android:textSize="20sp"
+            tools:text="UserName" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/placeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:layout_toRightOf="@+id/ivProfilePicture"
+            tools:text="AppleBees" />
+
+        <TextView
+            android:id="@+id/reviewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivProfilePicture"
+            android:layout_marginLeft="10dp"
+            tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
+
+        <Button
+            android:id="@+id/btnSeeMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reviewDescription"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:text="See More"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/btnSeeMore"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="50dp"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+
+    </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>

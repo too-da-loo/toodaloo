@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +62,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private TextView tvPlaceName;
         private ImageView ivImage;
         private ImageView ivProfilePicture;
+        private Button btnSeeMore;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +72,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvDescription = itemView.findViewById(R.id.reviewDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            btnSeeMore = itemView.findViewById(R.id.btnSeeMore);
 
+            btnSeeMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ivImage.setVisibility(View.VISIBLE);
+                }
+            });
         }
 
         public void bind(Post post) {
