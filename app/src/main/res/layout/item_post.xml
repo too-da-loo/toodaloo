@@ -38,12 +38,20 @@
             android:textSize="20sp"
             tools:text="UserName" />
 
+        <ImageView
+            android:id="@+id/ivLocationMarker"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/username"
+            android:layout_toRightOf="@+id/ivProfilePicture"
+            app:srcCompat="@drawable/ic_location" />
+
         <TextView
             android:id="@+id/placeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/username"
-            android:layout_toRightOf="@+id/ivProfilePicture"
+            android:layout_toRightOf="@+id/ivLocationMarker"
             tools:text="AppleBees" />
 
         <TextView
@@ -75,7 +83,6 @@
             android:scaleType="centerInside"
             android:visibility="gone"
             tools:srcCompat="@tools:sample/avatars" />
-
 
 
     </RelativeLayout>
