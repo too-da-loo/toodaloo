@@ -15,6 +15,7 @@ public class Post extends ParseObject {
    public static final String KEY_PLACE_NAME = "placeName";
    public static final String KEY_PLACE_ID = "placeID";
    public static final String KEY_PROFILE_IMAGE = "profilePicture";
+   public static final String KEY_OBJECT_ID = "objectId";
 
    public String getDescription(){
       return getString(KEY_DESCRIPTION);

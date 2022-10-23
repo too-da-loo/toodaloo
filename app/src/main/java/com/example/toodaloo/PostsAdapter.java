@@ -1,20 +1,27 @@
 package com.example.toodaloo;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.List;
 
@@ -38,7 +45,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = posts.get(position);
-        holder.bind(post);
+        //Added extra position parameter for bind method in order to delete item post from the list(position)
+        holder.bind(post,position);
     }
 
     @Override
@@ -64,7 +72,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private ImageView ivImage;
         private ImageView ivProfilePicture;
         private ToggleButton btnSeeMore;
-
+        private ImageButton btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,7 +82,30 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             ivImage = itemView.findViewById(R.id.ivImage);
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             btnSeeMore = itemView.findViewById(R.id.btnSeeMore);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
 
+        }
+
+        public void bind(Post post, int position) {
+            //Create a User class to get relational data from Post object for the profile picture
+            ParseObject user = post.getParseObject(Post.KEY_USER);
+            ParseFile profileImage = user.getParseFile("profilePicture");
+            if (profileImage != null) {
+                Glide.with(context).load(profileImage.getUrl()).into(ivProfilePicture);
+            }
+
+            //Bind the post data to the view elements
+            tvDescription.setText(post.getDescription());
+            tvUsername.setText("@" + post.getUser().getUsername());
+            tvPlaceName.setText(post.getPlaceName());
+
+            //Get image of the post
+            ParseFile image = post.getImage();
+            if (image != null) {
+                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+            }
+
+            //OnClickListener to show/hide the photo associated with a post
             btnSeeMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,24 +117,38 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                     }
                 }
             });
-        }
 
-        public void bind(Post post) {
-            //Create a User class to get relational data from Post object
-            ParseObject user = post.getParseObject(Post.KEY_USER);
-            ParseFile profileImage = user.getParseFile("profilePicture");
-            if (profileImage != null) {
-                Glide.with(context).load(profileImage.getUrl()).into(ivProfilePicture);
-            }
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(btnDelete.getContext(), "Delete!", Toast.LENGTH_SHORT).show();
+                    //Log.i("PostAdapter", "Post Key: " + post.getKeyObjectId());
 
-            //Bind the post data to the view elements
-            tvDescription.setText(post.getDescription());
-            tvUsername.setText("@" + post.getUser().getUsername());
-            tvPlaceName.setText(post.getPlaceName());
-            ParseFile image = post.getImage();
-            if (image != null) {
-                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
-            }
+                    //posts is the list of Post objects. We use the position from the onBindViewholder parameter to delete
+                    //the post at specified position from the recyclerView
+                    posts.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, posts.size());
+
+                    //Query to delete the Post from the database
+                    ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+
+                    //Constraint to only display posts of the selected objectID
+                    query.whereEqualTo(Post.KEY_OBJECT_ID, post.getObjectId());
+                    query.getFirstInBackground(new GetCallback<Post>() {
+                        @Override
+                        public void done(Post object, ParseException e) {
+                            try {
+                                object.delete();
+                                object.saveInBackground();
+                            } catch (ParseException parseException) {
+                                parseException.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            });
+
         }
     }
 }
