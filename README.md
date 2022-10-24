@@ -39,16 +39,6 @@ Post
 |createdAt|DateTime|date when post is created (default field)|
 |updatedAt|DateTime|date when post is last updated (default field)|
 
-
-## Walkthrough
-
-Here's a walkthrough of implemented user stories:
-
-<img src='toodaloo.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
-<img src='toodaloo2.gif' title='Video Walkthrough2' width='300' alt='Video Walkthrough' />
-<img src='toodaloo3.gif' title='Video Walkthrough3' width='300' alt='Video Walkthrough' />
-<img src='toodaloo4.gif' title='Video Walkthrough4' width='300' alt='Video Walkthrough' />
-
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
 <img src="https://github.com/too-da-loo/toodaloo/blob/main/Wireframe.jpg" width=600>
