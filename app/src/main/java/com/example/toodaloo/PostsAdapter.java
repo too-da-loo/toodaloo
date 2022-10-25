@@ -22,6 +22,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -83,12 +84,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             btnSeeMore = itemView.findViewById(R.id.btnSeeMore);
             btnDelete = itemView.findViewById(R.id.btnDelete);
-
         }
 
         public void bind(Post post, int position) {
             //Create a User class to get relational data from Post object for the profile picture
-            ParseObject user = post.getParseObject(Post.KEY_USER);
+            //ParseObject user = post.getParseObject(Post.KEY_USER);
+            ParseObject user = post.getParseUser(Post.KEY_USER);
             ParseFile profileImage = user.getParseFile("profilePicture");
             if (profileImage != null) {
                 Glide.with(context).load(profileImage.getUrl()).into(ivProfilePicture);
@@ -98,6 +99,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvDescription.setText(post.getDescription());
             tvUsername.setText("@" + post.getUser().getUsername());
             tvPlaceName.setText(post.getPlaceName());
+
+
+            /*
+            If the current user doesn't match the user of the Post, set the delete button to GONE
+            We get a reference to an owner of a post by calling post.getParseObject(Post.KEY_USER) above,
+            and then calling the getObjectId method to its user reference variable
+            We then get the object Id of the current user logined by calling arseUser.getCurrentUser().getObjectId() below
+            */
+            if (!user.getObjectId().equals(ParseUser.getCurrentUser().getObjectId() )){
+                btnDelete.setVisibility(View.GONE);
+                Log.e("PostAdapter", "Post " + user.getObjectId() + " = " + ParseUser.getCurrentUser().getObjectId());
+            }
+
 
             //Get image of the post
             ParseFile image = post.getImage();
@@ -121,8 +135,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(btnDelete.getContext(), "Delete!", Toast.LENGTH_SHORT).show();
-                    //Log.i("PostAdapter", "Post Key: " + post.getKeyObjectId());
+                    //Toast.makeText(btnDelete.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
 
                     //posts is the list of Post objects. We use the position from the onBindViewholder parameter to delete
                     //the post at specified position from the recyclerView
@@ -148,7 +161,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                     });
                 }
             });
-
         }
     }
 }
