@@ -9,17 +9,21 @@
 
     <TextView
         android:id="@+id/tvPlaceName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:layout_marginLeft="5dp"
         android:hint="Place Name"
         android:textSize="16sp" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         android:ems="10"
+        android:maxLines="5"
+        android:inputType="textNoSuggestions|textVisiblePassword|textMultiLine"
+        android:maxLength="240"
         android:hint="Write your review!" />
 
     <Button

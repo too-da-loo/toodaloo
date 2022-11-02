@@ -24,6 +24,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
@@ -74,6 +76,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private ImageView ivProfilePicture;
         private ToggleButton btnSeeMore;
         private ImageButton btnDelete;
+        private TextView tvDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +87,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
             btnSeeMore = itemView.findViewById(R.id.btnSeeMore);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvDate = itemView.findViewById(R.id.tvDate);
         }
 
         public void bind(Post post, int position) {
@@ -99,6 +103,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvDescription.setText(post.getDescription());
             tvUsername.setText("@" + post.getUser().getUsername());
             tvPlaceName.setText(post.getPlaceName());
+
+            //getCreatedAt() is a Parse function to get the creation date of the post
+            //We use the Java SimpleDateFormat class to format the date to our preference
+            Date date = post.getCreatedAt();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+            tvDate.setText(formatter.format(date));
 
 
             /*

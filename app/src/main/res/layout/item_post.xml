@@ -55,10 +55,20 @@
             tools:text="AppleBees" />
 
         <TextView
-            android:id="@+id/reviewDescription"
+            android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivProfilePicture"
+            android:layout_marginLeft="10dp"
+            android:textSize="10sp"
+            tools:text="19 December 2022 at 11:00 PM" />
+
+        <TextView
+            android:id="@+id/reviewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDate"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
 
@@ -91,7 +101,9 @@
             android:layout_marginLeft="160dp"
             android:layout_toRightOf="@id/username"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ic_delete_outline" />
+            android:minHeight="48dp"
+            app:srcCompat="@drawable/ic_delete_outline"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </RelativeLayout>
 

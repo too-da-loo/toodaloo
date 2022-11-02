@@ -14,6 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         tools:text="STARBUCKS" />
 
     <TextView
@@ -22,78 +24,60 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileEstablishmentName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="13dp"
         android:text="Address:" />
-
-    <TextView
-        android:id="@+id/restroomDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/restroomAddress"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:text="Distance:" />
-
-    <TextView
-        android:id="@+id/restroomInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/restroomDistance"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="38dp"
-        android:text="Ratings:" />
-
-    <TextView
-        android:id="@+id/restroomProfileInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/restroomInfo"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginBottom="10dp"
-        android:text="Reviews:" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="238dp"
-        android:layout_height="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="99dp"
-        android:layout_toEndOf="@+id/restroomInfo"
-        android:isIndicator="true" />
 
     <TextView
         android:id="@+id/restroomAddressInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/restroomAddress"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/restroomDistInfo"
+        android:id="@+id/restroomRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="83dp"
-        android:layout_toEndOf="@+id/restroomDistance"
-        android:text="TextView" />
+        android:layout_below="@+id/restroomAddressInfo"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Ratings:" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restroomAddressInfo"
+        android:layout_toRightOf="@+id/restroomRating"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:isIndicator="true"
+        android:numStars="5" />
+
+    <TextView
+        android:id="@+id/tvReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/restroomRating"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Reviews:" />
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/restroomProfileInfo">
+        android:layout_below="@id/tvReview"
+        android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRestaurant"
