@@ -273,7 +273,16 @@ public class MapFragment extends Fragment {
                             Log.e(TAG, "Exception: %s", task.getException());
                             map.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+
+                            //Recenters map to current location. For some reason the button appears
+                            //regardless if i assign true/False
                             map.getUiSettings().setMyLocationButtonEnabled(false);
+
+                            //this enables whether the directions toolbar provided by google
+                            //Set to false since it doesn't pair well with Places API selection
+                            //This toolbar only works when the marker is clicked, however the places API
+                            //brings a marker to our map without any clicking needed
+                            map.getUiSettings().setMapToolbarEnabled(false);
                         }
                     }
                 });

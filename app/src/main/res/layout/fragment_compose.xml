@@ -11,9 +11,8 @@
         android:id="@+id/tvPlaceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
         android:hint="Place Name"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etDescription"
@@ -24,24 +23,34 @@
         android:maxLines="5"
         android:inputType="textNoSuggestions|textVisiblePassword|textMultiLine"
         android:maxLength="240"
+        android:layout_marginTop="10dp"
         android:hint="Write your review!" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:stepSize="1"/>
 
     <Button
         android:id="@+id/btnCaptureImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Add Picture" />
-
-    <ImageView
-        android:id="@+id/ivPostImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:srcCompat="@tools:sample/avatars"/>
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Post!"/>
+
+
+    <ImageView
+        android:id="@+id/ivPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:srcCompat="@tools:sample/avatars"/>
 
 </LinearLayout>

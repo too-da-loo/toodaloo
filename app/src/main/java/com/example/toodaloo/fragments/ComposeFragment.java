@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class ComposeFragment extends Fragment {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private RatingBar ratingBar;
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
@@ -84,6 +86,7 @@ public class ComposeFragment extends Fragment {
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        ratingBar = view.findViewById(R.id.ratingBar);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +100,8 @@ public class ComposeFragment extends Fragment {
             public void onClick(View view) {
                 String placeName = tvPlaceName.getText().toString();
                 String description = etDescription.getText().toString();
+                float ratingNumber =  ratingBar.getRating();
+
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description can't be empty", Toast.LENGTH_SHORT).show();
                     return;
@@ -107,7 +112,11 @@ public class ComposeFragment extends Fragment {
                 }
                 Toast.makeText(getContext(), "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(placeName, description, currentUser, photoFile);
+
+
+
+                //Method to savePost in Parse server, paramters are the data we want saved
+                savePost(placeName, description, currentUser, ratingNumber, photoFile);
 
                 // Go back to MapFragment after submitting post
                 Fragment newFragment = new MapFragment();
@@ -176,12 +185,14 @@ public class ComposeFragment extends Fragment {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
-    private void savePost(String placeName, String description, ParseUser currentUser, File photoFile) {
+    private void savePost(String placeName, String description, ParseUser currentUser, float ratingNumber, File photoFile) {
         Post post = new Post();
         post.setPlaceName(placeName);
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
+        post.setRating((int) ratingNumber);
+
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -190,6 +201,8 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful!");
+                Log.i(TAG, "Rating Number:" + ratingNumber);
+                Log.i(TAG, "Place name:" + placeName);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
             }

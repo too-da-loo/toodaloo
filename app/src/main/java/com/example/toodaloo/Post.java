@@ -16,6 +16,7 @@ public class Post extends ParseObject {
    public static final String KEY_PLACE_ID = "placeID";
    public static final String KEY_PROFILE_IMAGE = "profilePicture";
    public static final String KEY_OBJECT_ID = "objectId";
+   public static final String KEY_RATING = "rating";
 
    public String getDescription(){
       return getString(KEY_DESCRIPTION);
@@ -47,5 +48,8 @@ public class Post extends ParseObject {
 
    public ParseFile getProfileImage() {return getParseFile(KEY_PROFILE_IMAGE);}
 
+   public int getRating() {return getInt(KEY_RATING);}
+
+   public void setRating(int ratingNumber) {put (KEY_RATING, ratingNumber);}
 
 }

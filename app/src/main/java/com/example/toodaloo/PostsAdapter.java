@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -77,6 +78,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private ToggleButton btnSeeMore;
         private ImageButton btnDelete;
         private TextView tvDate;
+        private RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +90,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             btnSeeMore = itemView.findViewById(R.id.btnSeeMore);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             tvDate = itemView.findViewById(R.id.tvDate);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
         }
 
         public void bind(Post post, int position) {
@@ -103,6 +106,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvDescription.setText(post.getDescription());
             tvUsername.setText("@" + post.getUser().getUsername());
             tvPlaceName.setText(post.getPlaceName());
+            ratingBar.setRating(post.getRating());
 
             //getCreatedAt() is a Parse function to get the creation date of the post
             //We use the Java SimpleDateFormat class to format the date to our preference
@@ -142,6 +146,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                 }
             });
 
+            //onClickListener for deleting a post
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

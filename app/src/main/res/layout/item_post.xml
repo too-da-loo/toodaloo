@@ -63,14 +63,24 @@
             android:textSize="10sp"
             tools:text="19 December 2022 at 11:00 PM" />
 
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDate"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
         <TextView
             android:id="@+id/reviewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvDate"
+            android:layout_below="@+id/ratingBar"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             tools:text="This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again." />
+
 
         <ToggleButton
             android:id="@+id/btnSeeMore"
