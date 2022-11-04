@@ -47,10 +47,15 @@ public class ComposeFragment extends Fragment {
     private ImageView ivPostImage;
     private Button btnSubmit;
     private RatingBar ratingBar;
+    String placeId;
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
     MarkerDetails markerDetails = new MarkerDetails();
+
+    /*
+    This Class is responsible for writing data into the database
+    */
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -64,6 +69,7 @@ public class ComposeFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 markerDetails = result.getParcelable("bundleKey2");
                 tvPlaceName.setText(markerDetails.getPlaceName());
+                placeId = markerDetails.getPlaceID();
             }
         });
     }
@@ -88,6 +94,7 @@ public class ComposeFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btnSubmit);
         ratingBar = view.findViewById(R.id.ratingBar);
 
+        //On Click listener for the camera
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,9 +102,11 @@ public class ComposeFragment extends Fragment {
             }
         });
 
+        //On Click listener for the Post button
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Alternative to getting placeName could just be calling markerDetails object again
                 String placeName = tvPlaceName.getText().toString();
                 String description = etDescription.getText().toString();
                 float ratingNumber =  ratingBar.getRating();
@@ -113,10 +122,8 @@ public class ComposeFragment extends Fragment {
                 Toast.makeText(getContext(), "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
                 ParseUser currentUser = ParseUser.getCurrentUser();
 
-
-
                 //Method to savePost in Parse server, paramters are the data we want saved
-                savePost(placeName, description, currentUser, ratingNumber, photoFile);
+                savePost(placeName, description, currentUser, ratingNumber, placeId, photoFile);
 
                 // Go back to MapFragment after submitting post
                 Fragment newFragment = new MapFragment();
@@ -185,13 +192,14 @@ public class ComposeFragment extends Fragment {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
-    private void savePost(String placeName, String description, ParseUser currentUser, float ratingNumber, File photoFile) {
+    private void savePost(String placeName, String description, ParseUser currentUser, float ratingNumber, String placeId, File photoFile) {
         Post post = new Post();
         post.setPlaceName(placeName);
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.setRating((int) ratingNumber);
+        post.setPlaceID(placeId);
 
         post.saveInBackground(new SaveCallback() {
             @Override
@@ -203,6 +211,7 @@ public class ComposeFragment extends Fragment {
                 Log.i(TAG, "Post save was successful!");
                 Log.i(TAG, "Rating Number:" + ratingNumber);
                 Log.i(TAG, "Place name:" + placeName);
+                Log.i(TAG, "Place ID:" + placeId);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
             }

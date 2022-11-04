@@ -44,7 +44,7 @@ public class Post extends ParseObject {
 
    public String getPlaceID() {return getString(KEY_PLACE_ID);}
 
-   public void setPlaceID(String placeID) {put (KEY_PLACE_NAME, placeID);}
+   public void setPlaceID(String placeID) {put (KEY_PLACE_ID, placeID);}
 
    public ParseFile getProfileImage() {return getParseFile(KEY_PROFILE_IMAGE);}
 

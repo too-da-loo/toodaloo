@@ -118,6 +118,7 @@ public class MapFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
+        //Initialize Places client to use Places API
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(getActivity());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -137,6 +138,7 @@ public class MapFragment extends Fragment {
                         @SuppressLint("ResourceType") View infoWindow = inflater.inflate(R.layout.custom_info_contents,
                                 (FrameLayout) getView().findViewById(R.layout.fragment_map));
 
+                        //Set the contents to be displayed in a markers Info Window
                         TextView title = infoWindow.findViewById(R.id.title);
                         title.setText(marker.getTitle());
 
@@ -177,6 +179,9 @@ public class MapFragment extends Fragment {
                     @Override
                     public void onInfoWindowClick(@NonNull Marker marker) {
                         Bundle result = new Bundle();
+
+                        //Using the marker.getTag method, where we stored our marker details object
+                        //Sends this object into the next fragment with the proper bundle/request key
                         result.putParcelable("bundleKey", (Parcelable) marker.getTag());
                         getParentFragmentManager().setFragmentResult("requestKey", result);
 
@@ -339,11 +344,12 @@ public class MapFragment extends Fragment {
         }
 
         if (locationPermissionGranted) {
-            // Use fields to define the data types to return.
+            // Use fields to define the data types to return. Can find a list of possible fields in Places documentation
             List<Place.Field> placeFields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.RATING, Place.Field.ADDRESS,
                     Place.Field.LAT_LNG);
 
-            //Place.Field.OPENING_HOURS
+
+            //Place.Field.OPENING_HOURS : Not avaible using FindCurrentPlaceRequest
 
             // Use the builder to create a FindCurrentPlaceRequest.
             FindCurrentPlaceRequest request =
@@ -420,11 +426,12 @@ public class MapFragment extends Fragment {
      * Displays a form allowing the user to select a place from a list of likely places.
      */
     private void openPlacesDialog() {
-        // Ask the user to choose the place where they are now.
-
+        // Opens a dialog box asking the user to choose a place.
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                //Creating a our custom MarkerDetails object to store Place attributes, to later be stored in a marker's tag field
                 MarkerDetails markerDetails = new MarkerDetails();
 
                 // The "which" argument contains the position of the selected item.
@@ -434,10 +441,9 @@ public class MapFragment extends Fragment {
                 markerDetails.setPlaceAddress(likelyPlaceAddresses[which]);
                 markerDetails.setPlaceRating(likelyPlaceRating[which]);
 
-                //Log.i(TAG, markerDetails.getPlaceName());
-
-
                 LatLng markerLatLng = likelyPlaceLatLngs[which];
+
+                //The MarkerSnippet allows us to add details to display in a markers Info Window
                 String markerSnippet = likelyPlaceAddresses[which] + "\n" + likelyPlaceRating[which];
 
                 if (likelyPlaceAttributions[which] != null) {
@@ -452,6 +458,7 @@ public class MapFragment extends Fragment {
                         .snippet(markerSnippet));
 
                 marker.showInfoWindow();
+
                 //Placing our custom markerDetails class into the marker's tag field
                 marker.setTag(markerDetails);
 

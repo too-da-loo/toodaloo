@@ -47,6 +47,7 @@ public class RestaurantFragment extends Fragment {
     private TextView placeAddress;
     private RatingBar placeRating;
     int counter = 0;
+    String placeID;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -61,8 +62,10 @@ public class RestaurantFragment extends Fragment {
                 markerDetails = bundle.getParcelable("bundleKey");
                 placeName.setText(markerDetails.getPlaceName());
                 placeAddress.setText(markerDetails.getPlaceAddress());
+                placeID = markerDetails.getPlaceID();
 
-                //Some ratings may be null, need to handle this exception
+                //These rating are from Google reviews of the location
+                //Crashes app if a place has no rating********************************************************
                 placeRating.setRating(Float.parseFloat(markerDetails.getPlaceRating()));
             }
         });
@@ -147,7 +150,7 @@ public class RestaurantFragment extends Fragment {
         query.include(Post.KEY_USER);
 
         //Constraint to only display posts of the selected location
-        query.whereEqualTo(Post.KEY_PLACE_NAME, placeName.getText().toString());
+        query.whereEqualTo(Post.KEY_PLACE_ID, placeID);
         query.setLimit(20);
 
         //Filters the order of the posts based on the time created key (newest on top)
