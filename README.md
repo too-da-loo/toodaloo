@@ -12,6 +12,7 @@ Application that assists users in locating restrooms within a set radius and oth
 Here's a walkthrough of implemented user stories:
 
 <img src='toodaloo.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
+<img src='toodaloo1.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 <img src='toodaloo2.gif' title='Video Walkthrough2' width='300' alt='Video Walkthrough' />
 <img src='toodaloo3.gif' title='Video Walkthrough3' width='300' alt='Video Walkthrough' />
 <img src='toodaloo4.gif' title='Video Walkthrough4' width='300' alt='Video Walkthrough' />
